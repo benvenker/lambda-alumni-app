@@ -1,0 +1,28 @@
+import React from "react";
+import { css } from "emotion";
+
+const ButtonGoogle = () => {
+  return (
+    <>
+      <button
+        className={css`
+          font-family: inherit;
+          display: block;
+          margin: 60px auto 60px auto;
+          background-color: #278ae4;
+          color: white;
+          width: 300px;
+          height: 46px;
+          font-size: 18px;
+          padding: 10px 0;
+          text-transform: uppercase;
+          border-radius: 5px;
+        `}
+      >
+        Google Sign In
+      </button>
+    </>
+  );
+};
+
+export default ButtonGoogle;
