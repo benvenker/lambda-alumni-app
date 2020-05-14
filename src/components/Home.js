@@ -4,7 +4,7 @@ import { css } from "emotion";
 import ButtonGoogle from "./ButtonGoogle";
 import LoginForm from "./LoginForm";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div
       className={css`

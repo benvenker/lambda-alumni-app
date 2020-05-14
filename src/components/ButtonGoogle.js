@@ -12,7 +12,7 @@ const ButtonGoogle = () => {
           background-color: #278ae4;
           color: white;
           width: 300px;
-          height: 46px;
+          height: 50px;
           font-size: 18px;
           padding: 10px 0;
           text-transform: uppercase;
