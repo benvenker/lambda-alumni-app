@@ -30,3 +30,7 @@
   font-size: 0.8em;
   color: #858484;
 }
+
+.post-container a {
+  text-decoration: none;
+}

@@ -1,6 +1,5 @@
 import React from "react";
 import Logo from "./Logo";
-import { Link } from "react-router-dom";
 import "./SearchBar.css";
 const SearchBar = () => {
   return (
