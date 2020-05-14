@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import Home from "./components/Home";
 import Posts from "./components/Posts";
 import Post from "./components/Post";
+import PostPage from "./components/PostPage";
 import { css } from "emotion";
 import "./App.css";
 
@@ -18,8 +19,8 @@ function App() {
       <Route exact path="/">
         <Home className={styles.app} />
       </Route>
-      <Route path="/post/:id">
-        <Post className={styles.app} />
+      <Route path="/post/">
+        <PostPage className={styles.app} />
       </Route>
       <Route path="/posts">
         <Posts className={styles.app} />

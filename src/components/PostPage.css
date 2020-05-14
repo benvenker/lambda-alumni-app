@@ -1,0 +1,32 @@
+.post-container {
+  border-bottom: 0;
+}
+
+.content-container {
+  padding: 0 20px;
+}
+
+.post-page textarea {
+  border: 1px solid lightgray;
+  display: block;
+  margin: 10px auto;
+  position: relative;
+  width: 66%;
+  padding: 1em;
+}
+
+.post-page textarea:focus {
+  outline: none;
+}
+
+.post-page button {
+  display: block;
+  margin: auto;
+  position: absolute;
+  right: 6em;
+
+  background-color: rgb(0, 136, 255);
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+}
