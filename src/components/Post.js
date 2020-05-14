@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "./Post.css";
 import ThumbIcon from "./ThumbIcon";
@@ -20,7 +20,9 @@ const Post = (props) => {
       <div className="column">
         {" "}
         <div className="row">
-          <div className="post-title">{post.title}</div>
+          <Link to={`/post/${post.id}`}>
+            <div className="post-title">{post.title}</div>
+          </Link>
           {/* <div className="post-url">{post.url.slice(8)}</div> */}
         </div>
         <div className="row">
