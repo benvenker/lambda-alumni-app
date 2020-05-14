@@ -9,11 +9,14 @@ import Comments from "./Comments";
 const PostPage = () => {
   const params = useParams();
   const [post, setPost] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [comments, setComments] = useState([]);
+
   const [request, setRequest] = useState({
     post_id: params.id,
     body: "",
     user_id: 1,
-    created_date: new Date(),
+    // created_date: new Date(),
   });
 
   const handleChange = (e) => {
@@ -24,9 +27,13 @@ const PostPage = () => {
   const submitComment = (e) => {
     e.preventDefault();
 
-    axios
-      .post(`http://localhost:5000/post/1`, request)
-      .then((request) => console.log(request));
+    setLoading(true);
+    axios.post(`http://localhost:5000/post/1`, request).then((res) => {
+      axios.get(`http://localhost:5000/comments/${params.id}`).then((res) => {
+        setComments(res.data);
+        setLoading(false);
+      });
+    });
   };
 
   useEffect(() => {
@@ -34,6 +41,16 @@ const PostPage = () => {
       .get(`http://localhost:5000/post/${params.id}`)
       .then((res) => setPost(res.data[0]))
       .then((post) => console.log("post: ", post));
+  }, [params.id]);
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`http://localhost:5000/comments/${params.id}`)
+      .then((response) => {
+        setComments(response.data);
+        setLoading(false);
+      });
   }, [params.id]);
 
   return (
@@ -52,7 +69,7 @@ const PostPage = () => {
         />
         <button onClick={submitComment}>SUBMIT</button>
       </div>
-      <Comments postId={params.id} />
+      <Comments loading={loading} comments={comments} postId={params.id} />
     </div>
   );
 };

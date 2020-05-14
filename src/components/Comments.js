@@ -5,30 +5,23 @@ import "./Comments.css";
 import Comment from "./Comment";
 
 const Comments = (props) => {
-  const { postId } = props;
-  const [loading, setLoading] = useState(false);
-  const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    setLoading(true);
-    axios.get(`http://localhost:5000/comments/${postId}`).then((response) => {
-      setComments(response.data);
-      setLoading(false);
-      console.log({ comments });
-    });
-  }, []);
+  const { comments, loading } = props;
 
   return (
     <div className="comment">
       {loading ? (
-        <Loader
-          type="Puff"
-          color="#00BFFF"
-          height={100}
-          width={100}
-          timeout={3000}
-          margin="auto"
-        />
+        <div className="loader-container">
+          <Loader
+            type="Puff"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            timeout={30000}
+            margin="auto"
+          />
+        </div>
+      ) : comments.length === 0 ? (
+        <div className="no-comments">No comments yet, submit one!</div>
       ) : (
         comments.map((comment) => {
           return <Comment comment={comment} />;
