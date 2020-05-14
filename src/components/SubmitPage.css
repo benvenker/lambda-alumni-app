@@ -1,0 +1,37 @@
+form {
+  margin: 20px 0;
+  padding: 20px;
+}
+
+form input {
+  display: block;
+  border: 1px solid lightgray;
+  margin: 20px;
+  background: #ffffff;
+  opacity: 0.5;
+  height: 39px;
+  width: 90%;
+
+  border: 1px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+form button {
+  background-color: blue;
+  color: white;
+  padding: 5px 10px;
+  position: absolute;
+  right: 0;
+  margin-right: 9em;
+}
+
+form textarea {
+  display: block;
+  border: 1px solid lightgray;
+  margin: 20px;
+  border: 1px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 5px;
+  width: 90%;
+}
