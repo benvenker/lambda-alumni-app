@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import "./PostPage.css";
 import Post from "./Post";
+import Comments from "./Comments";
 import { useParams } from "react-router-dom";
 
 const post = {
@@ -28,6 +29,7 @@ const PostPage = () => {
         />
         <button>SUBMIT</button>
       </div>
+      <Comments />
     </div>
   );
 };
