@@ -1,17 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import "./Post.css";
 import ThumbIcon from "./ThumbIcon";
 import { css } from "emotion";
 
 const Post = (props) => {
   const { post } = props;
-
-  const styles = css({
-    post: {
-      border: "1px solid red",
-      display: "flex",
-    },
-  });
+  console.log({ post });
 
   return (
     <div key={post.id} className="post-container">

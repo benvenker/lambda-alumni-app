@@ -19,7 +19,7 @@ function App() {
       <Route exact path="/">
         <Home className={styles.app} />
       </Route>
-      <Route path="/post/">
+      <Route path="/post/:id">
         <PostPage className={styles.app} />
       </Route>
       <Route path="/posts">

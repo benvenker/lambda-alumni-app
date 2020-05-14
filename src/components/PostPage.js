@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import SearchBar from "./SearchBar";
 import "./PostPage.css";
 import Post from "./Post";
 import Comments from "./Comments";
 import { useParams } from "react-router-dom";
 
-const post = {
-  id: 2,
-  user: "bavenker",
-  title: "This is an individual post",
-  votes: 33,
-  commments: 98,
-};
 const PostPage = () => {
   const params = useParams();
+  const [post, setPost] = useState({});
+
+  console.log(params);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/post/${params.id}`)
+      .then((res) => setPost(res.data[0]))
+      .then((post) => console.log("post: ", post));
+  }, [params.id]);
 
   return (
     <div className="post-page">
