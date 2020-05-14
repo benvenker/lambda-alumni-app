@@ -1,14 +1,33 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import SearchBar from "./SearchBar";
 import "./PostPage.css";
 import Post from "./Post";
 import Comments from "./Comments";
-import { useParams } from "react-router-dom";
 
 const PostPage = () => {
   const params = useParams();
   const [post, setPost] = useState({});
+  const [request, setRequest] = useState({
+    post_id: 1,
+    body: "",
+    user_id: 1,
+    created_date: new Date(),
+  });
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setRequest({ ...request, [e.target.name]: e.target.value });
+  };
+
+  const submitComment = (e) => {
+    e.preventDefault();
+
+    axios
+      .post(`http://localhost:5000/post/1`, request)
+      .then((reqeust) => console.log(request));
+  };
 
   console.log(params);
 
@@ -25,13 +44,16 @@ const PostPage = () => {
       <Post post={post} />
       <div className="content-container">
         <textarea
-          name="comment-body"
+          onChange={handleChange}
+          value={request.body}
+          // name="body"
+          name="body"
           id="comment-body"
           cols="30"
           rows="10"
           placeholder="Type your comment..."
         />
-        <button>SUBMIT</button>
+        <button onClick={submitComment}>SUBMIT</button>
       </div>
       <Comments />
     </div>
