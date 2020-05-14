@@ -1,47 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Post from "./Post";
 import "./Posts.css";
 import SearchBar from "./SearchBar";
 // import posts from "../data";
 
 const Posts = () => {
-  const posts = [
-    {
-      title: "Some great post title goes here",
-      url: "https://google.com",
-      user: "JaneDoe",
-      votes: 44,
-      comments: 7,
-    },
-    {
-      title: "Some great post title goes here",
-      url: "https://google.com",
-      user: "JaneDoe",
-      votes: 44,
-      comments: 7,
-    },
-    {
-      title: "Some great post title goes here",
-      url: "https://google.com",
-      user: "JaneDoe",
-      votes: 44,
-      comments: 7,
-    },
-    {
-      title: "Some great post title goes here",
-      url: "https://google.com",
-      user: "JaneDoe",
-      votes: 44,
-      comments: 7,
-    },
-    {
-      title: "Some great post title goes here",
-      url: "https://google.com",
-      user: "JaneDoe",
-      votes: 44,
-      comments: 7,
-    },
-  ];
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/posts`).then((res) => setPosts(res.data));
+  }, []);
+
   console.log(posts);
   // const { post } = props;
 
