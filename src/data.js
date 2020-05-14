@@ -1,0 +1,42 @@
+export const posts = [
+  {
+    title: "Some great post title goes here",
+    url: "https://google.com",
+    user: "JaneDoe",
+    votes: 44,
+    comments: 7,
+    id: 1,
+  },
+  {
+    title: "Some great post title goes here",
+    url: "https://google.com",
+    user: "JaneDoe",
+    votes: 44,
+    comments: 7,
+    id: 2,
+  },
+  {
+    title: "Some great post title goes here",
+    url: "https://google.com",
+    user: "JaneDoe",
+    votes: 44,
+    comments: 7,
+    id: 3,
+  },
+  {
+    title: "Some great post title goes here",
+    url: "https://google.com",
+    user: "JaneDoe",
+    votes: 44,
+    comments: 7,
+    id: 4,
+  },
+  {
+    title: "Some great post title goes here",
+    url: "https://google.com",
+    user: "JaneDoe",
+    votes: 44,
+    comments: 7,
+    id: 5,
+  },
+];
