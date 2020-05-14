@@ -8,3 +8,9 @@ body {
   /* width: 100%; */
   overflow-x: hidden;
 }
+
+.new-post {
+  padding: 10px;
+  background-color: blue;
+  color: white;
+}

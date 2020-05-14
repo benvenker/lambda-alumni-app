@@ -26,7 +26,7 @@ const PostPage = () => {
 
     axios
       .post(`http://localhost:5000/post/1`, request)
-      .then((reqeust) => console.log(request));
+      .then((request) => console.log(request));
   };
 
   useEffect(() => {
@@ -44,7 +44,6 @@ const PostPage = () => {
         <textarea
           onChange={handleChange}
           value={request.body}
-          // name="body"
           name="body"
           id="comment-body"
           cols="30"

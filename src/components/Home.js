@@ -21,7 +21,7 @@ const Home = (props) => {
       >
         Lambda Alumni Network
       </h1>
-      <Logo />
+      <Logo dimensions={180} />
       <ButtonGoogle />
       <LoginForm />
     </div>
