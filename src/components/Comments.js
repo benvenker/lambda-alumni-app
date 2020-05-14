@@ -1,36 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./Comments.css";
 import Comment from "./Comment";
 
-const comments = [
-  {
-    user: "benvenker",
-    date: "2020-05-13",
-    body:
-      "This was a really interesting post, I'm so glad you  made it. One thing I wa thinking about  was how unoriginal it is. I think I've seen almost the exact same post like 35 times today.",
-  },
-  {
-    user: "benvenker",
-    date: "2020-05-13",
-    body:
-      "This was a really interesting post, I'm so glad you  made it. One thing I wa thinking about  was how unoriginal it is. I think I've seen almost the exact same post like 35 times today.",
-  },
-  {
-    user: "benvenker",
-    date: "2020-05-13",
-    body:
-      "This was a really interesting post, I'm so glad you  made it. One thing I wa thinking about  was how unoriginal it is. I think I've seen almost the exact same post like 35 times today.",
-  },
-  {
-    user: "benvenker",
-    date: "2020-05-13",
-    body:
-      "This was a really interesting post, I'm so glad you  made it. One thing I wa thinking about  was how unoriginal it is. I think I've seen almost the exact same post like 35 times today.",
-  },
-];
-
 const Comments = (props) => {
-  const { comment } = props;
+  const { postId } = props;
+
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/comments/${postId}`)
+      .then((response) => setComments(response.data));
+  });
+
   return (
     <div className="comment">
       {comments.map((comment) => {

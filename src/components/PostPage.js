@@ -10,7 +10,7 @@ const PostPage = () => {
   const params = useParams();
   const [post, setPost] = useState({});
   const [request, setRequest] = useState({
-    post_id: 1,
+    post_id: params.id,
     body: "",
     user_id: 1,
     created_date: new Date(),
@@ -28,8 +28,6 @@ const PostPage = () => {
       .post(`http://localhost:5000/post/1`, request)
       .then((reqeust) => console.log(request));
   };
-
-  console.log(params);
 
   useEffect(() => {
     axios
@@ -55,7 +53,7 @@ const PostPage = () => {
         />
         <button onClick={submitComment}>SUBMIT</button>
       </div>
-      <Comments />
+      <Comments postId={params.id} />
     </div>
   );
 };
