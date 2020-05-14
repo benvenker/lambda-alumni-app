@@ -15,15 +15,21 @@ const Post = (props) => {
 
   return (
     <div key={post.id} className="post-container">
-      <div className="row">
+      <div className="column">
+        {" "}
         <div className="vote">
           <ThumbIcon />
         </div>
-        <div className="post-title">{post.title}</div>
-        <div className="post-url">({post.url.slice(8)})</div>
       </div>
-      <div className="row">
-        by {post.user} | {post.votes} votes | {post.comments} comments
+      <div className="column">
+        {" "}
+        <div className="row">
+          <div className="post-title">{post.title}</div>
+          {/* <div className="post-url">{post.url.slice(8)}</div> */}
+        </div>
+        <div className="row">
+          by {post.user} | {post.votes} votes | {post.comments} comments
+        </div>
       </div>
     </div>
   );

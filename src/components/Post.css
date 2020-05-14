@@ -1,19 +1,22 @@
 .post-container {
-  /* display: flex;
-  direction: column; */
-  padding: 20px;
+  display: flex;
+  direction: column;
+  padding: 20px 10px;
   border-bottom: 1px solid gray;
+  height: 3em;
 }
 
 .post-container .vote {
-  margin: 0 8px 0 0;
-  padding: 8px 0 0 0;
+  margin: 0 1em 0 0;
+  padding: 0.8em 0 0 0;
+  fill: #009dff;
 }
 
 .post-container .post-title {
   font-size: 1.2em;
   font-weight: 800;
-  color: rgb(37, 37, 208);
+  color: #009dff;
+  margin-bottom: 0.5em;
 }
 
 .post-container .post-url {
