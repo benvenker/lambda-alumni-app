@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 import Post from "./Post";
 import ButtonGoogle from "./ButtonGoogle";
@@ -21,7 +21,7 @@ const Posts = (props) => {
 
   return (
     <>
-      <SearchBar />
+      <SearchBar auth={auth} />
       {auth.isAuthenticated() ? (
         <button
           onClick={() => history.push("/submit")}
