@@ -1,0 +1,13 @@
+.sign-in-button {
+  font-family: "inherit";
+  display: "block";
+  width: "300px";
+  margin: "60px auto 60px auto";
+  background-color: "#a01a36";
+  color: "white";
+  height: "50px";
+  font-size: "18px";
+  padding: "10px 0";
+  text-transform: "uppercase";
+  border-radius: "5px";
+}

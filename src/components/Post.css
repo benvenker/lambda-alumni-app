@@ -2,11 +2,15 @@
   display: flex;
   direction: column;
   padding: 20px 10px;
-  border-bottom: 1px solid gray;
-  height: 3em;
+  /* border-bottom: 1px solid gray; */
+  min-height: 3em;
+  height: auto;
+  border-radius: 5px;
+  background-color: white;
+  margin: 0.2em;
 }
 
-.post-container .vote {
+.post-container .vote svg {
   margin: 0 1em 0 0;
   padding: 0.8em 0 0 0;
   fill: #009dff;

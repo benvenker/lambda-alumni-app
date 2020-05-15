@@ -1,10 +1,12 @@
 import React from "react";
 import { css } from "emotion";
 
-const ButtonGoogle = () => {
+const ButtonGoogle = (props) => {
+  const { auth } = props;
   return (
     <>
       <button
+        onClick={auth.login}
         className={css`
           font-family: inherit;
           display: block;

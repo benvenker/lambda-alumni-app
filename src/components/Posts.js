@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Post from "./Post";
+import ButtonGoogle from "./ButtonGoogle";
 import "./Posts.css";
 import SearchBar from "./SearchBar";
 // import posts from "../data";
 
-const Posts = () => {
+const Posts = (props) => {
+  const { auth } = props;
   const history = useHistory();
   const [posts, setPosts] = useState([]);
 
@@ -20,12 +22,16 @@ const Posts = () => {
   return (
     <>
       <SearchBar />
-      <button
-        onClick={() => history.push("/submit")}
-        className="button new-post"
-      >
-        Submit
-      </button>
+      {auth.isAuthenticated() ? (
+        <button
+          onClick={() => history.push("/submit")}
+          className="button new-post"
+        >
+          Submit
+        </button>
+      ) : (
+        <ButtonGoogle auth={auth} />
+      )}
       <ul>
         {posts.map((post) => (
           <Post key={post.id} post={post} />

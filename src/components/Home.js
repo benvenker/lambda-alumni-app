@@ -5,6 +5,7 @@ import ButtonGoogle from "./ButtonGoogle";
 import LoginForm from "./LoginForm";
 
 const Home = (props) => {
+  const { auth } = props;
   return (
     <div
       className={css`
@@ -22,7 +23,7 @@ const Home = (props) => {
         Lambda Alumni Network
       </h1>
       <Logo dimensions={180} />
-      <ButtonGoogle />
+      <ButtonGoogle auth={auth} />
       <LoginForm />
     </div>
   );
