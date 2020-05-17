@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Route, useHistory } from "react-router-dom";
+import { Route, useHistory, Redirect } from "react-router-dom";
 import Auth from "./auth/Auth";
 
 import Home from "./components/Home";
@@ -8,6 +8,7 @@ import Posts from "./components/Posts";
 import Post from "./components/Post";
 import PostPage from "./components/PostPage";
 import SubmitPage from "./components/SubmitPage";
+import Profile from "./components/Profile";
 import Callback from "./Callback";
 import { css } from "emotion";
 import "./App.css";
@@ -39,6 +40,9 @@ function App(props) {
       <Route path="/submit">
         <SearchBar />
         <SubmitPage className={styles.app} />
+      </Route>
+      <Route path="/profile">
+        {auth.isAuthenticated() ? <Profile auth={auth} /> : <Redirect to="/" />}
       </Route>
     </div>
   );
