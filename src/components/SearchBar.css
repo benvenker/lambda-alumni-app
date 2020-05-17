@@ -19,3 +19,10 @@
 .search-bar input:focus {
   outline: none;
 }
+
+.search-bar .logout-button {
+  color: white;
+  background-color: rgb(82, 82, 82);
+  border: none;
+  margin-left: 10xp;
+}

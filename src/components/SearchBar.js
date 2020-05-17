@@ -11,7 +11,7 @@ const SearchBar = (props) => {
       <input type="text" placeholder="Search all posts..." />
       <span>
         <button
-          style={{ color: "white" }}
+          className="logout-button"
           onClick={auth.isAuthenticated() ? auth.logout : auth.login}
         >
           {auth.isAuthenticated() ? "Log out" : "Log In"}
