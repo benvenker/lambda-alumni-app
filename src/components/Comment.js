@@ -11,7 +11,7 @@ const Comment = (props) => {
       <div className="comment-body">
         <p>{comment.body}</p>
       </div>
-      <button>REPLY</button>
+      {/* <button>REPLY</button> */}
     </>
   );
 };

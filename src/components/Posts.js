@@ -16,9 +16,6 @@ const Posts = (props) => {
     axios.get(`http://localhost:5000/posts`).then((res) => setPosts(res.data));
   }, []);
 
-  console.log(posts);
-  // const { post } = props;
-
   return (
     <>
       <SearchBar auth={auth} />
@@ -32,7 +29,7 @@ const Posts = (props) => {
       ) : (
         <ButtonGoogle auth={auth} />
       )}
-      <ul>
+      <ul className="posts-container">
         {posts.map((post) => (
           <Post key={post.id} post={post} />
         ))}

@@ -78,9 +78,11 @@ const PostPage = (props) => {
           rows="10"
           placeholder="Type your comment..."
         />
-        <button onClick={submitComment}>SUBMIT</button>
+        <button className="submit-comment-button" onClick={submitComment}>
+          SUBMIT
+        </button>
+        <Comments loading={loading} comments={comments} postId={params.id} />
       </div>
-      <Comments loading={loading} comments={comments} postId={params.id} />
     </div>
   );
 };

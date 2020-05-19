@@ -24,7 +24,11 @@ const Comments = (props) => {
         <div className="no-comments">No comments yet, submit one!</div>
       ) : (
         comments.map((comment) => {
-          return <Comment comment={comment} />;
+          return (
+            <div className="comments-container">
+              <Comment comment={comment} />
+            </div>
+          );
         })
       )}
     </div>

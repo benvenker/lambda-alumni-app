@@ -8,6 +8,7 @@
   border-radius: 5px;
   background-color: white;
   margin: 0.2em;
+  box-shadow: 5px 5px 5px rgb(238, 238, 238);
 }
 
 .post-container .vote svg {

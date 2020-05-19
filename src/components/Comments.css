@@ -9,3 +9,8 @@
   padding: 20px;
   margin-top: 20px;
 }
+
+.comments-container {
+  width: 66%;
+  margin: auto;
+}
