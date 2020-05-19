@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./SubmitPage.css";
 
-const SubmitPage = () => {
+const SubmitPage = (props) => {
+  const { auth } = props;
+  console.log("access toekn: ", auth.getAccessToken());
   const [formState, setFormState] = useState({
     title: "",
     url: "",
@@ -18,7 +20,12 @@ const SubmitPage = () => {
   const submitPost = () => {
     const body = formState;
     axios
-      .post(`http://localhost:5000/submit`, body)
+      .post(`http://localhost:5000/submit`, body, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.getAccessToken()}`,
+        },
+      })
       .then((response) => console.log(response));
   };
 

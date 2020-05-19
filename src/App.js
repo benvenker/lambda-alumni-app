@@ -38,8 +38,8 @@ function App(props) {
         <Posts auth={auth} className={styles.app} />
       </Route>
       <Route path="/submit">
-        <SearchBar />
-        <SubmitPage className={styles.app} />
+        <SearchBar auth={auth} />
+        <SubmitPage auth={auth} className={styles.app} />
       </Route>
       <Route path="/profile">
         {auth.isAuthenticated() ? <Profile auth={auth} /> : <Redirect to="/" />}
