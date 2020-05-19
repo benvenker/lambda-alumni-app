@@ -24,7 +24,7 @@ const Profile = (props) => {
       {profile ? (
         <div className="profile">
           <p>{auth.userProfile.nickname}</p>
-          <img src={auth.userProfile.picture} alt="profile" />
+          <img src={auth.userProfile.picture} alt="profile" width={200} />
         </div>
       ) : (
         <h2>loading...</h2>

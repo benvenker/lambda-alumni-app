@@ -6,7 +6,8 @@ import "./PostPage.css";
 import Post from "./Post";
 import Comments from "./Comments";
 
-const PostPage = () => {
+const PostPage = (props) => {
+  console.log("Access Token: ", props.auth.getAccessToken());
   const params = useParams();
   const [post, setPost] = useState({});
   const [loading, setLoading] = useState(false);
@@ -29,10 +30,16 @@ const PostPage = () => {
 
     setLoading(true);
     axios.post(`http://localhost:5000/post/1`, request).then((res) => {
-      axios.get(`http://localhost:5000/comments/${params.id}`).then((res) => {
-        setComments(res.data);
-        setLoading(false);
-      });
+      axios
+        .get(`http://localhost:5000/comments/${params.id}`, {
+          headers: {
+            Authorization: `Bearer ${props.auth.getAccessToken()}`,
+          },
+        })
+        .then((res) => {
+          setComments(res.data);
+          setLoading(false);
+        });
     });
   };
 
@@ -46,16 +53,20 @@ const PostPage = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/comments/${params.id}`)
+      .get(`http://localhost:5000/comments/${params.id}`, {
+        headers: {
+          Authorization: `Bearer ${props.auth.getAccessToken()}`,
+        },
+      })
       .then((response) => {
         setComments(response.data);
         setLoading(false);
       });
-  }, [params.id]);
+  }, [params.id, props.auth]);
 
   return (
     <div className="post-page">
-      <SearchBar />
+      <SearchBar auth={props.auth} />
       <Post post={post} />
       <div className="content-container">
         <textarea

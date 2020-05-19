@@ -3,6 +3,7 @@ import Logo from "./Logo";
 import "./SearchBar.css";
 
 const SearchBar = (props) => {
+  console.log("searchbar props:", props);
   const { auth } = props;
   return (
     <div className="search-bar">

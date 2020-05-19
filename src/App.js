@@ -32,7 +32,7 @@ function App(props) {
         <Callback auth={auth} className={styles.app} />
       </Route>
       <Route path="/post/:id">
-        <PostPage className={styles.app} />
+        <PostPage auth={auth} className={styles.app} />
       </Route>
       <Route path="/posts">
         <Posts auth={auth} className={styles.app} />
