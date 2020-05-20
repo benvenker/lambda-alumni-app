@@ -7,33 +7,24 @@ const SearchBar = (props) => {
   const [toggled, setToggled] = useState(false);
   const { auth } = props;
 
+  const navItems = [
+    { link: "/", content: <Logo dimensions={30} /> },
+    { item: "", content: <input type="text" /> },
+    {
+      item: "",
+      content: (
+        <button
+          className="logout-button"
+          onClick={auth.isAuthenticated() ? auth.logout : auth.login}
+        >
+          {auth.isAuthenticated() ? "Log out" : "Log In"}
+        </button>
+      ),
+    },
+  ];
   return (
     <div className="nav-bar">
-      <button className="hamburger-menu" onClick={() => setToggled(!toggled)}>
-        <FaAlignRight />
-      </button>
-
-      <ul className={toggled ? "nav-links show-nav" : "nav-links"}>
-        <li href="#">
-          {" "}
-          <Logo dimensions={30} />
-        </li>
-        <li href="#">
-          <input type="text" placeholder="Search all posts..." />
-        </li>
-        <li href="#">
-          {" "}
-          <button
-            className="logout-button"
-            onClick={auth.isAuthenticated() ? auth.logout : auth.login}
-          >
-            {auth.isAuthenticated() ? "Log out" : "Log In"}
-          </button>
-        </li>
-      </ul>
-
-      {/* <Logo dimensions={45} />
-
+      <Logo dimensions={45} />
       <input type="text" placeholder="Search all posts..." />
       <span>
         <button
@@ -42,7 +33,7 @@ const SearchBar = (props) => {
         >
           {auth.isAuthenticated() ? "Log out" : "Log In"}
         </button>
-      </span> */}
+      </span>
     </div>
   );
 };
