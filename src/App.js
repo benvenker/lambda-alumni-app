@@ -5,7 +5,6 @@ import Auth from "./auth/Auth";
 import Home from "./components/Home";
 import SearchBar from "./components/SearchBar";
 import Posts from "./components/Posts";
-import Post from "./components/Post";
 import PostPage from "./components/PostPage";
 import SubmitPage from "./components/SubmitPage";
 import Profile from "./components/Profile";

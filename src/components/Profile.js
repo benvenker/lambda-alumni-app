@@ -8,10 +8,10 @@ const Profile = (props) => {
 
   useEffect(() => {
     const loadUserProfile = () => {
-      auth.getProfile((profile, error) => {
+      auth.getProfile((profile, err) => {
         setProfile(auth.userProfile);
         console.log("Profile: ", auth.userProfile);
-        setError(error);
+        setError(err);
       });
     };
 

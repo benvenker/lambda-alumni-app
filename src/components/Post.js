@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import axios from "axios";
+import React from "react";
+import { Link } from "react-router-dom";
 import "./Post.css";
 import ThumbIcon from "./ThumbIcon";
-import { css } from "emotion";
 
 const Post = (props) => {
   const { post } = props;
-  console.log({ post });
 
   return (
     <div key={post.id} className="post-container">
