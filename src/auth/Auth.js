@@ -1,4 +1,5 @@
 import auth0, { WebAuth } from "auth0-js";
+import axios from "axios";
 
 export default class Auth {
   constructor(history) {
@@ -24,6 +25,16 @@ export default class Auth {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
         this.history.push("/posts");
+        this.getProfile(() => {
+          console.log("this.userProfile: ", this.userProfile);
+          axios
+            .post(`http://localhost:5000/add-user`, {
+              username: this.userProfile.email,
+            })
+            .then((response) => console.log(response))
+            .catch((err) => console.log(err));
+        });
+        console.log({ authResult });
       } else if (err) {
         this.history.push("/");
         alert(`Error: ${err.error}. Check the console for further details.`);
