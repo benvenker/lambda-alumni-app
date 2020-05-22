@@ -30,19 +30,6 @@ const Posts = (props) => {
     };
 
     loadUserProfile();
-
-    // const body = { username: auth.userProfile.email };
-
-    // if (profile) {
-    //   if (profile.username.length > 1) {
-    //     console.log(
-    //       axios
-    //         .post(`http://localhost:5000/add-user`, body)
-    //         .then((respone) => console.log(respone))
-    //     );
-    //   }
-    // }
-
     console.log("Auth profile from posts: ", profile);
   }, [profile, auth]);
 
@@ -61,7 +48,7 @@ const Posts = (props) => {
       )}
       <ul className="posts-container">
         {posts.map((post) => (
-          <Post key={post.id} post={post} />
+          <Post profile={profile} key={post.id} post={post} />
         ))}
       </ul>
     </>
