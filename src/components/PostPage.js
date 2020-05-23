@@ -7,15 +7,17 @@ import Post from "./Post";
 import Comments from "./Comments";
 
 const PostPage = (props) => {
+  const { auth } = props;
   const params = useParams();
   const [post, setPost] = useState({});
+  const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(false);
   const [comments, setComments] = useState([]);
 
   const [request, setRequest] = useState({
     post_id: params.id,
     body: "",
-    user_id: 1,
+    user_id: 0,
     // created_date: new Date(),
   });
 
@@ -41,6 +43,41 @@ const PostPage = (props) => {
         });
     });
   };
+
+  useEffect(() => {
+    // get the user profile
+    const loadUserProfile = () => {
+      auth.getProfile((profile, err) => {
+        setProfile(auth.userProfile);
+        const body = { username: profile.email };
+        console.log({ body });
+
+        const getUserIdFromDb = () => {
+          return axios
+            .post(
+              `http://localhost:5000/users`,
+              body
+              // {
+              //   headers: {
+              //     "Content-Type": "application/json",
+              //     Authorization: `Bearer ${auth.getAccessToken()}`,
+              //   },
+              // }
+            )
+            .then((response) => {
+              console.log(response);
+              setProfile({ ...profile, user_id: response.data.id });
+              setRequest({ ...request, user_id: response.data.id });
+            });
+        };
+
+        getUserIdFromDb();
+      });
+    };
+
+    loadUserProfile();
+    // console.log({ profile });
+  }, []);
 
   useEffect(() => {
     axios
