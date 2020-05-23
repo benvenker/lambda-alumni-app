@@ -8,13 +8,21 @@ const Post = (props) => {
   const { post, profile } = props;
 
   const [votes, setVotes] = useState(0);
+  const [comments, setComments] = useState(0);
 
   useEffect(() => {
     axios
       .post(`http://localhost:5000/votes`, { post_id: post.id })
       .then((response) => setVotes(response.data[0].count))
       .catch((err) => console.log(err));
-  });
+  }, [votes, post.id]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/comments/${post.id}/count`)
+      .then((reponse) => setComments(reponse.data[0].count))
+      .catch((err) => console.log(err));
+  }, [post.id]);
 
   const handleVote = (post) => {
     console.log("clicked");
@@ -47,7 +55,7 @@ const Post = (props) => {
           {/* <div className="post-url">{post.url.slice(8)}</div> */}
         </div>
         <div className="row">
-          by {post.user} | {votes} votes | {post.comments} comments
+          by {post.username} | {votes} votes | {comments} comments
         </div>
       </div>
     </div>
