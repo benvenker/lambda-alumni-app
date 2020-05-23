@@ -6,7 +6,7 @@ const Comment = (props) => {
   return (
     <div className="comment" key={comment.id}>
       <div className="comment-info">
-        {comment.username} at {comment.user_id} {comment.created_date}
+        {comment.username} on {comment.created_date}
       </div>
       <div className="comment-body">
         <p>{comment.body}</p>
