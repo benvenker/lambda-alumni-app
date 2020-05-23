@@ -105,6 +105,7 @@ const PostPage = (props) => {
       <SearchBar auth={props.auth} />
       <Post post={post} />
       <div className="content-container">
+        {post.body && post.body.length > 0 ? <div>{post.body}</div> : null}
         <textarea
           onChange={handleChange}
           value={request.body}
