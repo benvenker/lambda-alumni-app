@@ -7,7 +7,6 @@ import Post from "./Post";
 import Comments from "./Comments";
 
 const PostPage = (props) => {
-  console.log("Access Token: ", props.auth.getAccessToken());
   const params = useParams();
   const [post, setPost] = useState({});
   const [loading, setLoading] = useState(false);
@@ -29,7 +28,7 @@ const PostPage = (props) => {
     e.preventDefault();
 
     setLoading(true);
-    axios.post(`http://localhost:5000/post/1`, request).then((res) => {
+    axios.post(`http://localhost:5000/post`, request).then((res) => {
       axios
         .get(`http://localhost:5000/comments/${params.id}`, {
           headers: {
