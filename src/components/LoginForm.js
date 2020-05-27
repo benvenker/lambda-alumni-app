@@ -6,7 +6,7 @@ import { css } from "emotion";
 const styles = {
   label: css({
     display: "block",
-    textAlign: "left",
+    textAlign: "center",
     padding: "5px",
   }),
 

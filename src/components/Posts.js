@@ -16,7 +16,10 @@ const Posts = (props) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/posts`).then((res) => setPosts(res.data));
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/posts`)
+      .then((res) => setPosts(res.data));
+    // .then((res) => console.log("posts: ", res));
   }, []);
 
   // Get the user profile and post new users to the API
@@ -47,9 +50,10 @@ const Posts = (props) => {
         <ButtonGoogle auth={auth} />
       )}
       <ul className="posts-container">
-        {posts.map((post) => (
-          <Post profile={profile} key={post.id} post={post} />
-        ))}
+        {posts.map((post) => {
+          console.log("post: ", post);
+          return <Post profile={profile} key={post.id} post={post} />;
+        })}
       </ul>
     </>
   );

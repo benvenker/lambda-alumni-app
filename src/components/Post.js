@@ -12,14 +12,14 @@ const Post = (props) => {
 
   useEffect(() => {
     axios
-      .post(`http://localhost:5000/votes`, { post_id: post.id })
+      .post(`${process.env.REACT_APP_API_URL}/votes`, { post_id: post.id })
       .then((response) => setVotes(response.data[0].count))
       .catch((err) => console.log(err));
   }, [votes, post.id]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/comments/${post.id}/count`)
+      .get(`${process.env.REACT_APP_API_URL}/comments/${post.id}/count`)
       .then((reponse) => setComments(reponse.data[0].count))
       .catch((err) => console.log(err));
   }, [post.id]);
@@ -31,7 +31,7 @@ const Post = (props) => {
       username: profile.email,
     };
     axios
-      .post(`http://localhost:5000/upvote`, body)
+      .post(`${process.env.REACT_APP_API_URL}/upvote`, body)
       .then((response) =>
         response.status === 200 ? setVotes((votes) => votes++) : null
       )

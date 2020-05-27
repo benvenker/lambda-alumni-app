@@ -30,9 +30,9 @@ const PostPage = (props) => {
     e.preventDefault();
 
     setLoading(true);
-    axios.post(`http://localhost:5000/post`, request).then((res) => {
+    axios.post(`${process.env.REACT_APP_API_URL}/post`, request).then((res) => {
       axios
-        .get(`http://localhost:5000/comments/${params.id}`, {
+        .get(`${process.env.REACT_APP_API_URL}/comments/${params.id}`, {
           headers: {
             Authorization: `Bearer ${props.auth.getAccessToken()}`,
           },
@@ -55,7 +55,7 @@ const PostPage = (props) => {
         const getUserIdFromDb = () => {
           return axios
             .post(
-              `http://localhost:5000/users`,
+              `${process.env.REACT_APP_API_URL}/users`,
               body
               // {
               //   headers: {
@@ -81,7 +81,7 @@ const PostPage = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/post/${params.id}`)
+      .get(`${process.env.REACT_APP_API_URL}/post/${params.id}`)
       .then((res) => setPost(res.data[0]))
       .then((post) => console.log("post: ", post));
   }, [params.id]);
@@ -89,7 +89,7 @@ const PostPage = (props) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/comments/${params.id}`, {
+      .get(`${process.env.REACT_APP_API_URL}/comments/${params.id}`, {
         headers: {
           Authorization: `Bearer ${props.auth.getAccessToken()}`,
         },

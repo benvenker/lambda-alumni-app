@@ -27,7 +27,7 @@ const SubmitPage = (props) => {
         const getUserIdFromDb = () => {
           return axios
             .post(
-              `http://localhost:5000/users`,
+              `${process.env.REACT_APP_API_URL}/users`,
               body
               // {
               //   headers: {
@@ -56,10 +56,11 @@ const SubmitPage = (props) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  const submitPost = () => {
+  const submitPost = (e) => {
+    e.preventDefault();
     const body = formState;
     axios
-      .post(`http://localhost:5000/submit`, body, {
+      .post(`${process.env.REACT_APP_API_URL}/submit`, body, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${auth.getAccessToken()}`,
@@ -70,7 +71,7 @@ const SubmitPage = (props) => {
 
   return (
     <div className="submit-form-container">
-      <form onSubmit={submitPost}>
+      <form onSubmit={(e) => submitPost(e)}>
         <label htmlFor="title" id="title" name="title">
           <input
             onChange={handleChange}

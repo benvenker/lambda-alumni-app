@@ -28,7 +28,7 @@ export default class Auth {
         this.getProfile(() => {
           console.log("this.userProfile: ", this.userProfile);
           axios
-            .post(`http://localhost:5000/add-user`, {
+            .post(`${process.env.REACT_APP_API_URL}/add-user`, {
               username: this.userProfile.email,
             })
             .then((response) => console.log(response))
