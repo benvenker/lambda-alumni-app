@@ -42,14 +42,14 @@ const Posts = (props) => {
       {auth.isAuthenticated() ? (
         <button
           onClick={() => history.push("/submit")}
-          className="button new-post"
+          className="py-1 px-2 bg-blue-400 text-white rounded-md ml-6 my-3 text-xs"
         >
           Submit
         </button>
       ) : (
         <ButtonGoogle auth={auth} />
       )}
-      <ul className="posts-container">
+      <ul className="posts-container w-2/3 my-2 mx-auto">
         {posts.map((post) => {
           console.log("post: ", post);
           return <Post profile={profile} key={post.id} post={post} />;

@@ -2,22 +2,3 @@ body {
   position: relative;
   background-color: rgb(244, 241, 241);
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  /* width: 100%; */
-  overflow-x: hidden;
-}
-
-button.new-post {
-  padding: 10px;
-  background-color: rgb(0, 136, 255);
-  color: white;
-  border-radius: 5px;
-}
-
-.posts-container {
-  width: 95%;
-  margin: 10px auto;
-}
