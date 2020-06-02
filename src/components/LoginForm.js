@@ -4,25 +4,6 @@ import { Link } from "react-router-dom";
 import { css } from "emotion";
 
 const styles = {
-  label: css({
-    display: "block",
-    textAlign: "center",
-    padding: "5px",
-  }),
-
-  userInput: css({
-    display: `block`,
-    margin: `auto`,
-    width: `300px`,
-    height: `40px`,
-    borderRadius: `5px`,
-    fontSsize: `16px`,
-    border: `1px solid lightgray`,
-    ":focus": {
-      outline: `none`,
-    },
-  }),
-
   button: css({
     fontFamily: "inherit",
     display: "block",
@@ -40,33 +21,35 @@ const styles = {
 
 const LoginForm = () => {
   return (
-    <form
-      className={css`
-        padding: 30px;
-      `}
-    >
-      <label htmlFor="username" className={styles.label}>
+    <form className="p-6">
+      <label htmlFor="username" className="block text-center p-1">
         Username
         <input
-          className={styles.userInput}
+          className="block m-auto h-10 w-1/3 rounded-m text-sm border-gray-300"
           type="text"
           id="username"
           name="username"
         />
       </label>
-      <label htmlFor="password" className={styles.label}>
+      <label htmlFor="password" className="block text-center p-1">
         Password
         <input
-          className={styles.userInput}
+          className="block m-auto h-10 w-1/3 rounded-m text-sm border-gray-300"
           type="password"
           id="password"
           name="password"
         />
       </label>
       <Link to="/posts">
-        <button className={styles.button} type="submit">
-          Sign In
-        </button>
+        {/* TODO: Center button */}
+        <div className="flex flex-col items center justify-center">
+          <button
+            className="w-1/3 bg-red-800 my-8 mx-auto text-white h-12 py-2 px-0 uppercase rounded-md"
+            type="submit"
+          >
+            Sign In
+          </button>
+        </div>
       </Link>
     </form>
   );
