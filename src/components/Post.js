@@ -39,22 +39,25 @@ const Post = (props) => {
   };
 
   return (
-    <div key={post.id} className="post-container">
+    <div
+      key={post.id}
+      className="post-container flex flex-column py-4 px-2 h-auto rounded bg-white m-1 shadow-xs"
+    >
       <div className="column">
         {" "}
-        <div className="vote" onClick={() => handleVote(post)}>
+        <div className="mx-1 my-0 py-1 px-0" onClick={() => handleVote(post)}>
           <ThumbIcon />
         </div>
       </div>
       <div className="column">
         {" "}
-        <div className="row">
-          <Link to={`/post/${post.id}`}>
-            <div className="post-title">{post.title}</div>
+        <div className="flex flex-row">
+          <Link className={"no-underline"} to={`/post/${post.id}`}>
+            <div className="text-blue-500 px-3 text-sm my-0">{post.title}</div>
           </Link>
           {/* <div className="post-url">{post.url.slice(8)}</div> */}
         </div>
-        <div className="row">
+        <div className="flex flex-row text-xs px-3 text-gray-400">
           by {post.username} | {votes} votes | {comments} comments
         </div>
       </div>

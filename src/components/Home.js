@@ -13,12 +13,13 @@ const Home = (props) => {
       `}
     >
       <h1
-        className={css`
-          width: 314px;
-          margin: 72px auto 30px auto;
-          font-size: 36px;
-          font-weight: normal;
-        `}
+        // className={css`
+        //   width: 314px;
+        //   margin: 72px auto 30px auto;
+        //   font-size: 36px;
+        //   font-weight: normal;
+        // `}
+        className="text-5xl text-center w-64 m-auto"
       >
         Lambda Alumni Network
       </h1>
