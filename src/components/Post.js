@@ -55,7 +55,7 @@ const Post = (props) => {
           <Link className={"no-underline"} to={`/post/${post.id}`}>
             <div className="text-blue-500 px-3 text-sm my-0">{post.title}</div>
           </Link>
-          {/* <div className="post-url">{post.url.slice(8)}</div> */}
+          {/* <div className="post-url text-sm text-gray-300">{post.url.slice(8)}</div> */}
         </div>
         <div className="flex flex-row text-xs px-3 text-gray-400">
           by {post.username} | {votes} votes | {comments} comments
