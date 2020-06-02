@@ -109,7 +109,7 @@ const PostPage = (props) => {
           {post.body && post.body.length > 0 ? <div>{post.body}</div> : null}
         </div>
         <textarea
-          className="border-gray-300 block my-6 ml-24 relative w-2/3 p-1 focus:outline-none"
+          className="rounded-md border-gray-300 block my-6 ml-24 relative w-2/3 p-1 focus:outline-none text-sm"
           onChange={handleChange}
           value={request.body}
           name="body"
@@ -119,7 +119,7 @@ const PostPage = (props) => {
           placeholder="Type your comment..."
         />
         <button
-          className="submit-comment-button block ml-24 bg-blue-500 text-white py-1 px-2 rounded-md"
+          className="submit-comment-button block ml-24 bg-blue-500 text-white py-1 px-2 rounded-md text-sm"
           onClick={submitComment}
         >
           SUBMIT
