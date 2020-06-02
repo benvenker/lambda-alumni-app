@@ -21,7 +21,7 @@ const ButtonGoogle = (props) => {
           border-radius: 5px;
         `}
       >
-        Google Sign In
+        Sign in with Google
       </button>
     </>
   );
