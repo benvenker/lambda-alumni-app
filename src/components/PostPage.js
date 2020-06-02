@@ -101,12 +101,15 @@ const PostPage = (props) => {
   }, [params.id, props.auth]);
 
   return (
-    <div className="post-page">
+    <div className="post-page h-screen">
       <SearchBar auth={props.auth} />
       <Post post={post} />
-      <div className="content-container">
-        {post.body && post.body.length > 0 ? <div>{post.body}</div> : null}
+      <div className="content-container py-0 px-4 w-11/12 my-1 mx-auto">
+        <div className="post-body ml-24">
+          {post.body && post.body.length > 0 ? <div>{post.body}</div> : null}
+        </div>
         <textarea
+          className="border-gray-300 block my-6 ml-24 relative w-2/3 p-1 focus:outline-none"
           onChange={handleChange}
           value={request.body}
           name="body"
@@ -115,7 +118,10 @@ const PostPage = (props) => {
           rows="10"
           placeholder="Type your comment..."
         />
-        <button className="submit-comment-button" onClick={submitComment}>
+        <button
+          className="submit-comment-button block ml-24 bg-blue-500 text-white py-1 px-2 rounded-md"
+          onClick={submitComment}
+        >
           SUBMIT
         </button>
         <Comments loading={loading} comments={comments} postId={params.id} />
