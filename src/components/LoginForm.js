@@ -42,13 +42,13 @@ const LoginForm = () => {
       </label>
       <Link to="/posts">
         {/* TODO: Center button */}
-        <div className="flex flex-col items center justify-center">
-          <button
-            className="w-1/3 bg-red-800 my-8 mx-auto text-white h-12 py-2 px-0 uppercase rounded-md"
+        <div className="m-auto w-1/3 h-6 bg-red-300 border-gray-800">
+          <div
+            className="w-full bg-red-800 my-8 mx-auto text-white h-10 py-2 px-0 uppercase rounded-md"
             type="submit"
           >
             Sign In
-          </button>
+          </div>
         </div>
       </Link>
     </form>
