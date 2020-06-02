@@ -11,7 +11,7 @@ const Home = (props) => {
       <h1 className="text-5xl w-64 mx-auto my-3">Lambda Alumni Network</h1>
       <Logo dimensions={180} />
       <ButtonGoogle auth={auth} />
-      <LoginForm />
+      {/* <LoginForm /> */}
     </div>
   );
 };
