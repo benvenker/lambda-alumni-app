@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import SearchBar from "./SearchBar";
 import "./PostPage.css";
@@ -7,6 +7,7 @@ import Post from "./Post";
 import Comments from "./Comments";
 
 const PostPage = (props) => {
+  const history = useHistory();
   const { auth } = props;
   const params = useParams();
   const [post, setPost] = useState({});
@@ -47,32 +48,33 @@ const PostPage = (props) => {
   useEffect(() => {
     // get the user profile
     const loadUserProfile = () => {
-      auth.getProfile((profile, err) => {
-        setProfile(auth.userProfile);
-        const body = { username: profile.email };
-        console.log({ body });
+      if (auth.isAuthenticated())
+        auth.getProfile((profile, err) => {
+          setProfile(auth.userProfile);
+          const body = { username: profile.email };
+          console.log({ body });
 
-        const getUserIdFromDb = () => {
-          return axios
-            .post(
-              `${process.env.REACT_APP_API_URL}/users`,
-              body
-              // {
-              //   headers: {
-              //     "Content-Type": "application/json",
-              //     Authorization: `Bearer ${auth.getAccessToken()}`,
-              //   },
-              // }
-            )
-            .then((response) => {
-              console.log(response);
-              setProfile({ ...profile, user_id: response.data.id });
-              setRequest({ ...request, user_id: response.data.id });
-            });
-        };
+          const getUserIdFromDb = () => {
+            return axios
+              .post(
+                `${process.env.REACT_APP_API_URL}/users`,
+                body
+                // {
+                //   headers: {
+                //     "Content-Type": "application/json",
+                //     Authorization: `Bearer ${auth.getAccessToken()}`,
+                //   },
+                // }
+              )
+              .then((response) => {
+                console.log(response);
+                setProfile({ ...profile, user_id: response.data.id });
+                setRequest({ ...request, user_id: response.data.id });
+              });
+          };
 
-        getUserIdFromDb();
-      });
+          getUserIdFromDb();
+        });
     };
 
     loadUserProfile();
@@ -101,31 +103,43 @@ const PostPage = (props) => {
   }, [params.id, props.auth]);
 
   return (
-    <div className="post-page h-screen">
-      <SearchBar auth={props.auth} />
-      <Post post={post} />
-      <div className="content-container py-0 px-4 w-11/12 my-1 mx-auto">
-        <div className="post-body ml-24">
-          {post.body && post.body.length > 0 ? <div>{post.body}</div> : null}
+    <div className="post-page" auth={auth}>
+      {auth.isAuthenticated() ? (
+        <div className="post-page h-screen">
+          <SearchBar auth={props.auth} />
+          <Post post={post} />
+          <div className="content-container py-0 px-4 w-11/12 my-1 mx-auto">
+            <div className="post-body ml-24">
+              {post.body && post.body.length > 0 ? (
+                <div>{post.body}</div>
+              ) : null}
+            </div>
+            <textarea
+              className="rounded-md border-gray-300 block my-6 ml-24 relative w-2/3 p-1 focus:outline-none text-sm"
+              onChange={handleChange}
+              value={request.body}
+              name="body"
+              id="comment-body"
+              cols="30"
+              rows="10"
+              placeholder="Type your comment..."
+            />
+            <button
+              className="submit-comment-button block ml-24 bg-blue-500 text-white text-xs py-1 px-2 rounded-md "
+              onClick={submitComment}
+            >
+              SUBMIT
+            </button>
+            <Comments
+              loading={loading}
+              comments={comments}
+              postId={params.id}
+            />
+          </div>
         </div>
-        <textarea
-          className="rounded-md border-gray-300 block my-6 ml-24 relative w-2/3 p-1 focus:outline-none text-sm"
-          onChange={handleChange}
-          value={request.body}
-          name="body"
-          id="comment-body"
-          cols="30"
-          rows="10"
-          placeholder="Type your comment..."
-        />
-        <button
-          className="submit-comment-button block ml-24 bg-blue-500 text-white py-1 px-2 rounded-md text-sm"
-          onClick={submitComment}
-        >
-          SUBMIT
-        </button>
-        <Comments loading={loading} comments={comments} postId={params.id} />
-      </div>
+      ) : (
+        history.push("/")
+      )}
     </div>
   );
 };
