@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import "./Post.css";
 import ThumbIcon from "./ThumbIcon";
 
 const Post = (props) => {
+  const history = useHistory();
   const { post, profile } = props;
 
   const [votes, setVotes] = useState(0);
   const [comments, setComments] = useState(0);
+
+  console.log("location: ", history.location.pathname);
 
   useEffect(() => {
     axios
@@ -52,9 +55,17 @@ const Post = (props) => {
       <div className="column">
         {" "}
         <div className="flex flex-row">
-          <Link className={"no-underline"} to={`/post/${post.id}`}>
-            <div className="text-blue-500 px-3 text-sm my-0">{post.title}</div>
-          </Link>
+          {history.location.pathname === "/posts" ? (
+            <Link className={"no-underline"} to={`/post/${post.id}`}>
+              <div className="text-blue-500 px-3 text-sm my-0">
+                {post.title}
+              </div>
+            </Link>
+          ) : (
+            <a className="text-blue-500" href={post.url}>
+              {post.title}
+            </a>
+          )}
           {/* <div className="post-url text-sm text-gray-300">{post.url.slice(8)}</div> */}
         </div>
         <div className="flex flex-row text-xs px-3 text-gray-400">
