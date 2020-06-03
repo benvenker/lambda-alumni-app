@@ -2,16 +2,14 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 const Logo = (props) => {
-  console.log("logoo props: ", props);
   const history = useHistory();
   const { dimensions } = props;
   return (
-    <div className="logo m-auto">
+    <div className="logo mx-5">
       <svg
         onClick={() => history.push("/posts")}
         width={dimensions}
         height={dimensions}
-        className="m-auto"
         viewBox="0 0 182 180"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
