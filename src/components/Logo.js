@@ -5,7 +5,7 @@ const Logo = (props) => {
   const history = useHistory();
   const { dimensions } = props;
   return (
-    <div className="logo mx-5">
+    <div className="logo">
       <svg
         onClick={() => history.push("/posts")}
         width={dimensions}
