@@ -49,7 +49,7 @@ const Posts = (props) => {
       ) : (
         <ButtonGoogle auth={auth} />
       )}
-      <ul className="posts-container w-2/3 my-2 mx-auto">
+      <ul className="posts-container lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto">
         {posts.map((post) => {
           console.log("post: ", post);
           return <Post profile={profile} key={post.id} post={post} />;
