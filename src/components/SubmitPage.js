@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./SubmitPage.css";
 
 const SubmitPage = (props) => {
+  const history = useHistory();
   const { auth } = props;
   const [profile, setProfile] = useState({});
 
@@ -66,14 +68,16 @@ const SubmitPage = (props) => {
           Authorization: `Bearer ${auth.getAccessToken()}`,
         },
       })
+      .then(history.push("/posts"))
       .then((response) => console.log(response));
   };
 
   return (
     <div className="submit-form-container">
-      <form onSubmit={(e) => submitPost(e)}>
+      <form className="w-2/3 mx-auto my-8 p-8" onSubmit={(e) => submitPost(e)}>
         <label htmlFor="title" id="title" name="title">
           <input
+            className="focus:outline-none block p-2 border m-4 h-8 w-11/12 box-border rounded-md"
             onChange={handleChange}
             type="text"
             id="title"
@@ -83,6 +87,7 @@ const SubmitPage = (props) => {
         </label>
         <label htmlFor="url" id="url" name="url">
           <input
+            className="focus:outline-none sblock p-2 border m-4 h-8 w-11/12 box-border rounded-md"
             onChange={handleChange}
             type="text"
             id="url"
@@ -92,14 +97,21 @@ const SubmitPage = (props) => {
         </label>
         <label htmlFor="body">
           <textarea
+            placeholder="Enter optional post text..."
             onChange={handleChange}
             name="body"
             id="body"
             cols="30"
             rows="10"
+            className="resize-none focus:outline-none p-4 border text-gray-700 m-5 rounded-md w-11/12"
           ></textarea>
         </label>
-        <button type="submit">Submit</button>
+        <button
+          className="ml-5 bg-blue-500 text-white rounded-md py-1 px-3 text-sm"
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
