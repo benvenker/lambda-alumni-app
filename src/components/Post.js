@@ -62,9 +62,14 @@ const Post = (props) => {
               </div>
             </Link>
           ) : (
-            <a className="text-blue-500" href={post.url}>
-              {post.title}
-            </a>
+            <div>
+              <a className="text-blue-500" href={post.url}>
+                {post.title}
+              </a>{" "}
+              <span className="text-sm text-gray-500 underline">
+                <a href={post.url}>({post.url})</a>
+              </span>
+            </div>
           )}
           {/* <div className="post-url text-sm text-gray-300">{post.url.slice(8)}</div> */}
         </div>
