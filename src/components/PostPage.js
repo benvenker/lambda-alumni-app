@@ -111,7 +111,7 @@ const PostPage = (props) => {
           <div className="content-container py-0 px-4 w-11/12 my-1 mx-auto">
             <div className="post-body ml-24">
               {post.body && post.body.length > 0 ? (
-                <div>{post.body}</div>
+                <div className="mt-10 text-gray-700">{post.body}</div>
               ) : null}
             </div>
             <textarea
