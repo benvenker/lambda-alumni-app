@@ -7,24 +7,23 @@ const Comments = (props) => {
   const { comments, loading } = props;
 
   return (
-    <div className="comment">
+    <div className="comment m-auto flex flex-col">
       {loading ? (
-        <div className="loader-container">
+        <div className="loader-container m-auto text-center pt-5 border-gray-500">
           <Loader
             type="Puff"
             color="#00BFFF"
             height={100}
             width={100}
-            timeout={30000}
-            margin="auto"
+            timeout={300000}
           />
         </div>
       ) : comments.length === 0 ? (
-        <div className="no-comments">No comments yet, submit one!</div>
+        <div className="no-comments m-auto">No comments yet, submit one!</div>
       ) : (
         comments.map((comment) => {
           return (
-            <div className="comments-container">
+            <div className="comments-container m-auto">
               <Comment comment={comment} />
             </div>
           );
