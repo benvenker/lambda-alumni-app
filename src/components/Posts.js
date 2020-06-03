@@ -32,7 +32,9 @@ const Posts = (props) => {
       });
     };
 
-    loadUserProfile();
+    if (auth.isAuthenticated()) {
+      loadUserProfile();
+    }
     console.log("Auth profile from posts: ", profile);
   }, [profile, auth]);
 
