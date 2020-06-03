@@ -6,11 +6,11 @@ const SearchBar = (props) => {
   const { auth } = props;
 
   return (
-    <div className="nav-bar bg-gray-700 w-full p-3 pt-5 flex text-white">
+    <div className="nav-bar bg-gray-700 w-full p-3 pt-5 flex items-start text-white">
       <Logo dimensions={45} />
       <div className="w-3/4 pt-1">
         <input
-          className="bg-gray-800 w-full h-8 border-none rounded-full pl-5 focus:outline-none"
+          className="text-xs bg-gray-800 w-full h-8 border-none rounded-full pl-5 focus:outline-none"
           type="text"
           placeholder="Search all posts..."
         />
