@@ -5,10 +5,12 @@ import Post from "./Post";
 import ButtonGoogle from "./ButtonGoogle";
 import "./Posts.css";
 import SearchBar from "./SearchBar";
+import Loader from "react-loader-spinner";
 // import posts from "../data";
 
 const Posts = (props) => {
   const { auth } = props;
+  const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState({ email: "" });
   const [error, setError] = useState("");
 
@@ -18,7 +20,8 @@ const Posts = (props) => {
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/posts`)
-      .then((res) => setPosts(res.data));
+      .then((res) => setPosts(res.data))
+      .then(setLoading(false));
     // .then((res) => console.log("posts: ", res));
   }, []);
 
@@ -51,12 +54,26 @@ const Posts = (props) => {
       ) : (
         <ButtonGoogle auth={auth} />
       )}
-      <ul className="posts-container lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto">
-        {posts.map((post) => {
-          console.log("post: ", post);
-          return <Post profile={profile} key={post.id} post={post} />;
-        })}
-      </ul>
+      {!loading ? (
+        <ul className="posts-container lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto">
+          {posts.map((post) => {
+            console.log("post: ", post);
+            return <Post profile={profile} key={post.id} post={post} />;
+          })}
+        </ul>
+      ) : (
+        <div className="loader m-auto flex flex-col">
+          <div className="loader-container m-auto text-center pt-5 border-gray-500">
+            <Loader
+              type="Puff"
+              color="#00BFFF"
+              height={100}
+              width={100}
+              timeout={300000}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };
