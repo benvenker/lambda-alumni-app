@@ -1,0 +1,85 @@
+import React, { useState } from "react";
+import axios from "axios";
+
+const PostForm = (props) => {
+  const { auth, profile } = props;
+  const [formState, setFormState] = useState({
+    title: "",
+    url: "",
+    body: "",
+    created_date: new Date(),
+    username: "",
+    user_id: profile.user_id,
+  });
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
+
+  const submitPost = (e) => {
+    e.preventDefault();
+    const body = {
+      ...formState,
+      user_id: profile.user_id,
+      username: profile.email,
+    };
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/submit`, body, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.getAccessToken()}`,
+        },
+      })
+      .then((response) => console.log(response));
+  };
+
+  return (
+    <div className="submit-form-container">
+      <form className="w-2/3 mx-auto my-8 p-8" onSubmit={(e) => submitPost(e)}>
+        <label htmlFor="title" id="title" name="title">
+          <input
+            className="form-input focus:outline-none w-11/12"
+            onChange={handleChange}
+            type="text"
+            id="title"
+            name="title"
+            value={formState.title}
+            placeholder="Post title..."
+          />
+        </label>
+        <label htmlFor="url" id="url" name="url">
+          <input
+            className="form-input focus:outline-none w-11/12"
+            onChange={handleChange}
+            type="text"
+            id="url"
+            name="url"
+            value={formState.url}
+            placeholder="Post url..."
+          />
+        </label>
+        <label htmlFor="body">
+          <textarea
+            placeholder="Enter optional post text..."
+            onChange={handleChange}
+            name="body"
+            value={formState.body}
+            id="body"
+            cols="30"
+            rows="10"
+            className="resize-none focus:outline-none p-4 border text-gray-700 m-5 rounded-md w-11/12"
+          ></textarea>
+        </label>
+        <button
+          className="ml-5 bg-blue-500 text-white rounded-md py-1 px-3 text-sm"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default PostForm;
