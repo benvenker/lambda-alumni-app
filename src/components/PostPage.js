@@ -107,7 +107,7 @@ const PostPage = (props) => {
       {auth.isAuthenticated() ? (
         <div className="post-page h-screen">
           <SearchBar auth={props.auth} />
-          <Post post={post} />
+          <Post post={post} profile={profile} />
           <div className="content-container py-0 px-4 w-11/12 my-1 mx-auto">
             <div className="post-body ml-24">
               {post.body && post.body.length > 0 ? (
