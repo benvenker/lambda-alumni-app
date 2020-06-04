@@ -33,11 +33,19 @@ const Post = (props) => {
       post_id: post.id,
       username: profile.email,
     };
+
     axios
-      .post(`${process.env.REACT_APP_API_URL}/upvote`, body)
+      .post(`${process.env.REACT_APP_API_URL}/check-vote`, body)
       .then((response) =>
-        response.status === 200 ? setVotes((votes) => votes++) : null
+        response.data.length > 0
+          ? null // If the vote exists, we don't want to do anything
+          : axios
+              .post(`${process.env.REACT_APP_API_URL}/upvote`, body)
+              .then((response) =>
+                response.status === 200 ? setVotes((votes) => votes++) : null
+              )
       )
+
       .catch((err) => console.log(err));
   };
 
