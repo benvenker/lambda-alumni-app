@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar";
 import "./PostPage.css";
 import Post from "./Post";
 import Comments from "./Comments";
+import PostForm from "./PostForm";
 
 const PostPage = (props) => {
   const history = useHistory();
@@ -14,6 +15,7 @@ const PostPage = (props) => {
   const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(false);
   const [comments, setComments] = useState([]);
+  const [editing, setEditing] = useState(false);
 
   const [request, setRequest] = useState({
     post_id: params.id,
@@ -102,12 +104,17 @@ const PostPage = (props) => {
       });
   }, [params.id, props.auth]);
 
-  return (
+  return !editing ? (
     <div className="post-page" auth={auth}>
       {auth.isAuthenticated() ? (
         <div className="post-page h-screen">
           <SearchBar auth={props.auth} />
-          <Post post={post} />
+          <Post
+            post={post}
+            profile={profile}
+            editing={editing}
+            setEditing={setEditing}
+          />
           <div className="content-container py-0 px-4 w-11/12 my-1 mx-auto">
             <div className="post-body ml-24">
               {post.body && post.body.length > 0 ? (
@@ -141,6 +148,15 @@ const PostPage = (props) => {
         history.push("/")
       )}
     </div>
+  ) : (
+    <PostForm
+      auth={auth}
+      post={post}
+      setPost={setPost}
+      profile={profile}
+      editing={editing}
+      setEditing={setEditing}
+    />
   );
 };
 

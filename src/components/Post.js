@@ -6,7 +6,7 @@ import ThumbIcon from "./ThumbIcon";
 
 const Post = (props) => {
   const history = useHistory();
-  const { post, profile } = props;
+  const { post, profile, editing, setEditing } = props;
 
   const [votes, setVotes] = useState(0);
   const [comments, setComments] = useState(0);
@@ -44,39 +44,51 @@ const Post = (props) => {
   return (
     <div
       key={post.id}
-      className="post-container flex flex-column py-4 px-2 h-auto rounded bg-white m-1 shadow-xs"
+      className="post-container flex justify-between py-4 px-2 h-auto rounded bg-white m-1 shadow-xs"
     >
-      <div className="column">
-        {" "}
-        <div className="mx-1 my-0 py-1 px-0" onClick={() => handleVote(post)}>
-          <ThumbIcon />
+      <div className="flex flex-row">
+        <div className="column">
+          {" "}
+          <div className="mx-1 my-0 py-1 px-0" onClick={() => handleVote(post)}>
+            <ThumbIcon />
+          </div>
         </div>
-      </div>
-      <div className="column">
-        {" "}
-        <div className="flex flex-row">
-          {history.location.pathname === "/posts" ? (
-            <Link className={"no-underline"} to={`/post/${post.id}`}>
-              <div className="text-blue-500 px-3 text-sm my-0">
-                {post.title}
+        <div className="column">
+          {" "}
+          <div className="flex flex-row">
+            {history.location.pathname === "/posts" ? (
+              <Link className={"no-underline"} to={`/post/${post.id}`}>
+                <div className="text-blue-500 px-3 text-sm my-0">
+                  {post.title}
+                </div>
+              </Link>
+            ) : (
+              <div>
+                <a className="text-blue-500" href={post.url}>
+                  {post.title}
+                </a>{" "}
+                <span className="text-sm text-gray-500 underline">
+                  <a href={post.url}>({post.url})</a>
+                </span>
               </div>
-            </Link>
-          ) : (
-            <div>
-              <a className="text-blue-500" href={post.url}>
-                {post.title}
-              </a>{" "}
-              <span className="text-sm text-gray-500 underline">
-                <a href={post.url}>({post.url})</a>
-              </span>
-            </div>
-          )}
-          {/* <div className="post-url text-sm text-gray-300">{post.url.slice(8)}</div> */}
-        </div>
-        <div className="flex flex-row text-xs px-3 text-gray-400">
-          by {post.username} | {votes} votes | {comments} comments
+            )}
+            {/* <div className="post-url text-sm text-gray-300">{post.url.slice(8)}</div> */}
+          </div>
+          <div className="flex flex-row text-xs px-3 text-gray-400">
+            by {post.username} | {votes} votes | {comments} comments
+          </div>
         </div>
       </div>
+      {post.user_id && profile.user_id && post.user_id === profile.user_id ? (
+        <div className="column">
+          <div
+            className="btn-edit bg-red-600 text-white rounded px-2 py-1 text-xs cursor-pointer"
+            onClick={() => setEditing(true)}
+          >
+            Edit
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

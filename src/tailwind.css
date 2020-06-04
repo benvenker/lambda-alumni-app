@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
+
+.form-input {
+  @apply block p-2 border m-4 h-8 box-border rounded-md;
+}
+
 @tailwind utilities;
