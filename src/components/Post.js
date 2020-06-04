@@ -6,7 +6,7 @@ import ThumbIcon from "./ThumbIcon";
 
 const Post = (props) => {
   const history = useHistory();
-  const { post, profile } = props;
+  const { post, profile, editing, setEditing } = props;
 
   const [votes, setVotes] = useState(0);
   const [comments, setComments] = useState(0);
@@ -81,7 +81,10 @@ const Post = (props) => {
       </div>
       {post.user_id && profile.user_id && post.user_id === profile.user_id ? (
         <div className="column">
-          <div className="btn-edit bg-red-600 text-white rounded px-2 py-1">
+          <div
+            className="btn-edit bg-red-600 text-white rounded px-2 py-1 text-xs cursor-pointer"
+            onClick={() => setEditing(true)}
+          >
             Edit
           </div>
         </div>
