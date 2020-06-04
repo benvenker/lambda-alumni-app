@@ -43,6 +43,7 @@ const PostPage = (props) => {
         .then((res) => {
           setComments(res.data);
           setLoading(false);
+          setRequest({ ...request, body: "" });
         });
     });
   };
