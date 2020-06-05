@@ -1,23 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import "./LoginForm.css";
-import { css } from "emotion";
-
-const styles = {
-  button: css({
-    fontFamily: "inherit",
-    display: "block",
-    width: "300px",
-    margin: "60px auto 60px auto",
-    backgroundColor: "#a01a36",
-    color: "white",
-    height: "50px",
-    fontSize: "18px",
-    padding: "10px 0",
-    texTransform: "uppercase",
-    borderRadius: "5px",
-  }),
-};
 
 const LoginForm = () => {
   return (
