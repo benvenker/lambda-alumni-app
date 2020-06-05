@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, useHistory, Redirect } from "react-router-dom";
+import axios from "axios";
 import Auth from "./auth/Auth";
 
 import Home from "./components/Home";
@@ -9,36 +10,60 @@ import PostPage from "./components/PostPage";
 import SubmitPage from "./components/SubmitPage";
 import Profile from "./components/Profile";
 import Callback from "./Callback";
-import { css } from "emotion";
-import "./App.css";
-
-const styles = css({
-  app: {
-    fontFamily: "Fira Code",
-  },
-});
 
 function App(props) {
   const history = useHistory();
   const [auth, setAuth] = useState(new Auth(history));
+  const [searchTerms, setSearchterms] = useState("");
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Load default list of posts
+  useEffect(() => {
+    setLoading(true);
+    const body = { terms: searchTerms };
+    searchTerms === ""
+      ? axios
+          .get(`${process.env.REACT_APP_API_URL}/posts`)
+          .then((res) => setPosts(res.data))
+          .then(setLoading(false))
+          .catch((err) => err)
+      : axios
+          .post(`${process.env.REACT_APP_API_URL}/search`, body)
+          .then((res) => setPosts(res.data))
+          .then(setLoading(false))
+          .catch((err) => console.log(err));
+  }, [searchTerms]);
+
+  // Handle searching
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchterms(e.target.value);
+  };
 
   return (
-    <div className="App">
+    <div className="App font-sans bg-gray-100">
       <Route exact path="/">
-        <Home auth={auth} className={styles.app} />
+        <Home auth={auth} />
       </Route>
       <Route path="/callback">
-        <Callback auth={auth} className={styles.app} />
+        <Callback auth={auth} />
       </Route>
       <Route path="/post/:id">
-        <PostPage auth={auth} className={styles.app} />
+        <PostPage auth={auth} />
       </Route>
       <Route path="/posts">
-        <Posts auth={auth} className={styles.app} />
+        <Posts
+          auth={auth}
+          loading={loading}
+          handleSearch={handleSearch}
+          posts={posts}
+          searchTerms={searchTerms}
+        />
       </Route>
       <Route path="/submit">
         <SearchBar auth={auth} />
-        <SubmitPage auth={auth} className={styles.app} />
+        <SubmitPage auth={auth} />
       </Route>
       <Route path="/profile">
         {auth.isAuthenticated() ? <Profile auth={auth} /> : <Redirect to="/" />}

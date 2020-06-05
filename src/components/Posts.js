@@ -9,21 +9,10 @@ import Loader from "react-loader-spinner";
 // import posts from "../data";
 
 const Posts = (props) => {
-  const { auth } = props;
-  const [loading, setLoading] = useState(true);
+  const { auth, handleSearch, posts, loading, searchTerms } = props;
   const [profile, setProfile] = useState({ email: "" });
   const [error, setError] = useState("");
-
   const history = useHistory();
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/posts`)
-      .then((res) => setPosts(res.data))
-      .then(setLoading(false));
-    // .then((res) => console.log("posts: ", res));
-  }, []);
 
   // Get the user profile and post new users to the API
   useEffect(() => {
@@ -43,13 +32,13 @@ const Posts = (props) => {
 
   return (
     <>
-      <SearchBar auth={auth} />
+      <SearchBar auth={auth} handleSearch={handleSearch} />
       {auth.isAuthenticated() ? (
         <button
           onClick={() => history.push("/submit")}
           className="py-1 px-2 bg-blue-400 text-white rounded-md ml-6 my-3 text-xs"
         >
-          Submit
+          Submit a New Post
         </button>
       ) : (
         <ButtonGoogle auth={auth} />
