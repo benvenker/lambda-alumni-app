@@ -8,7 +8,7 @@ const SearchBar = (props) => {
 
   return (
     <div className="nav-bar bg-white w-full p-3 pt-5 flex items-start justify-between text-gray-700 shadow-md">
-      <Logo dimensions={45} />
+      <Logo dimensions={30} />
       <div className="w-3/4 pt-1">
         <input
           className="text-xs bg-gray-100 w-11/12 h-8 border-none rounded-sm outline mx-10 pl-5 focus:outline-none"

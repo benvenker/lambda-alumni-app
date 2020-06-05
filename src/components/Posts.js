@@ -33,16 +33,18 @@ const Posts = (props) => {
   return (
     <>
       <SearchBar auth={auth} handleSearch={handleSearch} />
-      {auth.isAuthenticated() ? (
-        <button
-          onClick={() => history.push("/submit")}
-          className="py-1 px-2 bg-blue-400 text-white rounded-md ml-6 my-3 text-xs"
-        >
-          Submit a New Post
-        </button>
-      ) : (
-        <ButtonGoogle auth={auth} />
-      )}
+      <div className="btn-container lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto">
+        {auth.isAuthenticated() ? (
+          <div
+            onClick={() => history.push("/submit")}
+            className="py-1 px-2 bg-blue-400 text-white w-1/4 text-center rounded-md ml-0 my-3 text-xs cursor-pointer"
+          >
+            Submit a New Post
+          </div>
+        ) : (
+          <ButtonGoogle auth={auth} />
+        )}
+      </div>
       {!loading ? (
         <ul className="posts-container lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto">
           {posts.map((post) => {
