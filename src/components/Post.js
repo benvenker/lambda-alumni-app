@@ -11,8 +11,6 @@ const Post = (props) => {
   const [votes, setVotes] = useState(0);
   const [comments, setComments] = useState(0);
 
-  console.log("location: ", history.location.pathname);
-
   useEffect(() => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/votes`, { post_id: post.id })
@@ -49,10 +47,21 @@ const Post = (props) => {
       .catch((err) => console.log(err));
   };
 
+  const handleDelete = () => {
+    const body = { id: post.id };
+    axios
+      .delete(`${process.env.REACT_APP_API_URL}/post/${post.id}`, body)
+      .then((response) => {
+        console.log(response);
+      })
+      .then(history.push("/"))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div
       key={post.id}
-      className="post-container py-5 flex justify-between py-4 px-2 h-auto rounded bg-white m-1 shadow-md"
+      className="post-container py-5 flex justify-between py-4 px-2 h-auto bg-white m-0 border"
     >
       <div className="flex flex-row">
         <div className="column">
@@ -75,25 +84,35 @@ const Post = (props) => {
                 <a className="text-gray-700 font-semibold" href={post.url}>
                   {post.title}
                 </a>{" "}
-                <span className="text-sm text-gray-500 underline">
+                <span className="text-sm text-gray-600 underline">
                   <a href={post.url}>({post.url})</a>
                 </span>
               </div>
             )}
             {/* <div className="post-url text-sm text-gray-300">{post.url.slice(8)}</div> */}
           </div>
-          <div className="flex flex-row text-xs px-3 text-gray-400">
+          <div className="flex flex-row text-xs px-3 text-gray-500">
             by {post.username} | {votes} votes | {comments} comments
           </div>
         </div>
       </div>
       {post.user_id && profile.user_id && post.user_id === profile.user_id ? (
-        <div className="column">
-          <div
-            className="btn-edit bg-red-600 text-white rounded px-2 py-1 text-xs cursor-pointer"
-            onClick={() => setEditing(true)}
-          >
-            Edit
+        <div className="edit-btns flex flex-row">
+          <div className="column">
+            <div
+              className="btn-edit bg-yellow-500 text-white rounded px-2 py-1 text-xs cursor-pointer"
+              onClick={() => setEditing(true)}
+            >
+              Edit
+            </div>
+          </div>
+          <div className="column">
+            <div
+              className="btn-delete bg-red-600 text-white rounded px-2 py-1 text-xs cursor-pointer ml-3"
+              onClick={handleDelete}
+            >
+              Delete
+            </div>
           </div>
         </div>
       ) : null}
