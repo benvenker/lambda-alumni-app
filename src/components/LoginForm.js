@@ -44,7 +44,7 @@ const LoginForm = () => {
         {/* TODO: Center button */}
         <div className="m-auto w-1/3 h-6 bg-red-300 border-gray-800">
           <div
-            className="w-full bg-red-800 my-8 mx-auto text-white h-10 py-2 px-0 uppercase rounded-md"
+            className="bg-red-800 my-8 mx-auto text-white h-10 py-2 px-0 uppercase rounded-md"
             type="submit"
           >
             Sign In

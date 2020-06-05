@@ -123,7 +123,7 @@ const PostPage = (props) => {
               ) : null}
             </div>
             <textarea
-              className="rounded-md border-gray-300 block my-6 ml-24 relative w-2/3 p-1 focus:outline-none text-sm"
+              className="rounded-md border border-gray-300 block my-6 ml-24 relative w-2/3 p-1 focus:outline-none text-sm"
               onChange={handleChange}
               value={request.body}
               name="body"
