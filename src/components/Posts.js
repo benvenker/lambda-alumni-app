@@ -33,7 +33,7 @@ const Posts = (props) => {
   return (
     <>
       <SearchBar auth={auth} handleSearch={handleSearch} />
-      <div className="btn-container lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto">
+      <div className="btn-container lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto h-full">
         {auth.isAuthenticated() ? (
           <div
             onClick={() => history.push("/submit")}
@@ -42,7 +42,8 @@ const Posts = (props) => {
             Submit a New Post
           </div>
         ) : (
-          <ButtonGoogle auth={auth} />
+          // <ButtonGoogle auth={auth} />
+          history.push("/")
         )}
       </div>
       {!loading ? (

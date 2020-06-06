@@ -16,23 +16,26 @@ function App(props) {
   const [auth, setAuth] = useState(new Auth(history));
   const [searchTerms, setSearchterms] = useState("");
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // Load default list of posts
   useEffect(() => {
-    setLoading(true);
-    const body = { terms: searchTerms };
-    searchTerms === ""
-      ? axios
-          .get(`${process.env.REACT_APP_API_URL}/posts`)
-          .then((res) => setPosts(res.data))
-          .then(setLoading(false))
-          .catch((err) => err)
-      : axios
-          .post(`${process.env.REACT_APP_API_URL}/search`, body)
-          .then((res) => setPosts(res.data))
-          .then(setLoading(false))
-          .catch((err) => console.log(err));
+    setTimeout(() => {
+      if (auth.isAuthenticated()) {
+        const body = { terms: searchTerms };
+        searchTerms === ""
+          ? axios
+              .get(`${process.env.REACT_APP_API_URL}/posts`)
+              .then((res) => setPosts(res.data))
+              .then(setLoading(false))
+              .catch((err) => err)
+          : axios
+              .post(`${process.env.REACT_APP_API_URL}/search`, body)
+              .then((res) => setPosts(res.data))
+              .then(setLoading(false))
+              .catch((err) => console.log(err));
+      }
+    }, 1000);
   }, [searchTerms]);
 
   // Handle searching
