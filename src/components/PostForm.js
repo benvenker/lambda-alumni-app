@@ -59,11 +59,20 @@ const PostForm = (props) => {
 
   return (
     <div className="submit-form-container">
-      <form className="w-2/3 mx-auto my-8 p-8" onSubmit={(e) => submitPost(e)}>
-        {editing ? <h1 className="text-xl ml-5 text-bold">Edit Post</h1> : null}
+      <form
+        className="bg-white rounded-md border w-2/3 mx-auto my-8 p-8"
+        onSubmit={(e) => submitPost(e)}
+      >
+        {editing ? (
+          <h1 className="text-2xl ml-5 text-bold text-gray-700">Edit Post</h1>
+        ) : (
+          <h1 className="text-2xl ml-5 text-bold text-gray-700">
+            Submit New Post
+          </h1>
+        )}
         <label htmlFor="title" id="title" name="title">
           <input
-            className="form-input focus:outline-none w-11/12"
+            className="form-input py-4 px-3 focus:outline-none w-11/12"
             onChange={editing ? handlePostUpdate : handleChange}
             type="text"
             id="title"
@@ -74,7 +83,7 @@ const PostForm = (props) => {
         </label>
         <label htmlFor="url" id="url" name="url">
           <input
-            className="form-input focus:outline-none w-11/12"
+            className="form-input py-4 px-3 focus:outline-none w-11/12"
             onChange={editing ? handlePostUpdate : handleChange}
             type="text"
             id="url"
@@ -92,7 +101,7 @@ const PostForm = (props) => {
             id="body"
             cols="30"
             rows="10"
-            className="resize-none focus:outline-none p-4 border text-gray-700 m-5 rounded-md w-11/12"
+            className="resize-none focus:outline-none py-4 px-3 bg border text-gray-700 m-5 rounded-md w-11/12"
           ></textarea>
         </label>
         <button
