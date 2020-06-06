@@ -26,7 +26,6 @@ const Post = (props) => {
   }, [post.id]);
 
   const handleVote = (post) => {
-    console.log("clicked");
     const body = {
       post_id: post.id,
       username: profile.email,
@@ -74,11 +73,9 @@ const Post = (props) => {
           {" "}
           <div className="flex flex-row">
             {history.location.pathname === "/posts" ? (
-              <Link className={"no-underline"} to={`/post/${post.id}`}>
-                <div className="hover:underline text-gray-700 px-3 text-md font-semibold my-0">
-                  {post.title}
-                </div>
-              </Link>
+              <div className="hover:underline text-gray-700 px-3 text-md font-semibold my-0">
+                <a href={`${post.url}`}>{post.title}</a>
+              </div>
             ) : (
               <div>
                 <a className="text-gray-700 font-semibold" href={post.url}>
@@ -92,7 +89,11 @@ const Post = (props) => {
             {/* <div className="post-url text-sm text-gray-300">{post.url.slice(8)}</div> */}
           </div>
           <div className="flex flex-row text-xs px-3 text-gray-500">
-            by {post.username} | {votes} votes | {comments} comments
+            by {post.username} | {votes} votes |{"  "}
+            <Link to={`/post/${post.id}`} className="hover:underline">
+              {"  "}
+              {comments} comments
+            </Link>
           </div>
         </div>
       </div>
