@@ -7,23 +7,10 @@ import ThumbIcon from "./ThumbIcon";
 const Post = (props) => {
   const history = useHistory();
   const { post, profile, editing, setEditing } = props;
+  const [currPost, setCurrPost] = useState(post);
 
   const [votes, setVotes] = useState(0);
   const [comments, setComments] = useState(0);
-
-  useEffect(() => {
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/votes`, { post_id: post.id })
-      .then((response) => setVotes(response.data[0].count))
-      .catch((err) => console.log(err));
-  }, [votes, post.id]);
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/comments/${post.id}/count`)
-      .then((reponse) => setComments(reponse.data[0].count))
-      .catch((err) => console.log(err));
-  }, [post.id]);
 
   const handleVote = (post) => {
     const body = {
@@ -39,7 +26,9 @@ const Post = (props) => {
           : axios
               .post(`${process.env.REACT_APP_API_URL}/upvote`, body)
               .then((response) =>
-                response.status === 200 ? setVotes((votes) => votes++) : null
+                response.status === 200
+                  ? setCurrPost((post) => post.votes++)
+                  : null
               )
       )
 
@@ -89,10 +78,10 @@ const Post = (props) => {
             {/* <div className="post-url text-sm text-gray-300">{post.url.slice(8)}</div> */}
           </div>
           <div className="flex flex-row text-xs px-3 text-gray-500">
-            by {post.username} | {votes} votes |{"  "}
-            <Link to={`/post/${post.id}`} className="hover:underline">
+            by {post.username} | {post.votes} votes |{"  "}
+            <Link to={`/post/${post.id}`} className="hover:underline ml-1">
               {"  "}
-              {comments} comments
+              {post.comments} comments
             </Link>
           </div>
         </div>
