@@ -4,15 +4,24 @@ import Post from "./Post";
 import "./Posts.css";
 import SearchBar from "./SearchBar";
 import Loader from "react-loader-spinner";
+import axios from "axios";
 // import posts from "../data";
 
 const Posts = (props) => {
-  const { auth, handleSearch, posts, loading } = props;
+  const { auth, handleSearch, posts, setPosts, loading, setLoading } = props;
   const [profile, setProfile] = useState({ email: "" });
   const [error, setError] = useState("");
   const history = useHistory();
 
   // Get the user profile and post new users to the API
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/posts`)
+      .then((res) => setPosts(res.data))
+      .then(setLoading(false))
+      .catch((err) => err);
+  }, [setLoading, setPosts]);
+
   useEffect(() => {
     const loadUserProfile = () => {
       auth.getProfile((profile, err) => {
