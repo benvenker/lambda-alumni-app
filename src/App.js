@@ -59,8 +59,10 @@ function App(props) {
         <Posts
           auth={auth}
           loading={loading}
+          setLoading={setLoading}
           handleSearch={handleSearch}
           posts={posts}
+          setPosts={setPosts}
           searchTerms={searchTerms}
         />
       </Route>
