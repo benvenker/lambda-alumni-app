@@ -9,9 +9,6 @@ const Post = (props) => {
   const { post, profile, editing, setEditing } = props;
   const [currPost, setCurrPost] = useState(post);
 
-  const [votes, setVotes] = useState(0);
-  const [comments, setComments] = useState(0);
-
   const handleVote = (post) => {
     const body = {
       post_id: post.id,
@@ -49,7 +46,7 @@ const Post = (props) => {
   return (
     <div
       key={post.id}
-      className="post-container py-5 flex justify-between py-4 px-2 h-auto bg-white m-0 border-t border-b-0 border-r border-l"
+      className="post-container py-5 flex justify-between py-4 px-2 h-auto bg-white border-t border-b-0 border-r border-l"
     >
       <div className="flex flex-row">
         <div className="column">
@@ -90,7 +87,7 @@ const Post = (props) => {
         <div className="edit-btns flex flex-row">
           <div className="column">
             <div
-              className="btn-edit bg-yellow-500 text-white rounded px-2 py-1 text-xs cursor-pointer"
+              className="btn-edit bg-white text-gray-600 underline rounded px-2 py-1 text-xs cursor-pointer"
               onClick={() => setEditing(true)}
             >
               Edit
@@ -98,7 +95,7 @@ const Post = (props) => {
           </div>
           <div className="column">
             <div
-              className="btn-delete bg-red-600 text-white rounded px-2 py-1 text-xs cursor-pointer ml-3"
+              className="btn-delete bg-red-600 text-white rounded px-2 py-1 box-border text-xs cursor-pointer ml-3"
               onClick={handleDelete}
             >
               Delete
