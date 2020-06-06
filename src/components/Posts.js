@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import Post from "./Post";
-import ButtonGoogle from "./ButtonGoogle";
 import "./Posts.css";
 import SearchBar from "./SearchBar";
 import Loader from "react-loader-spinner";
 // import posts from "../data";
 
 const Posts = (props) => {
-  const { auth, handleSearch, posts, loading, searchTerms } = props;
+  const { auth, handleSearch, posts, loading } = props;
   const [profile, setProfile] = useState({ email: "" });
   const [error, setError] = useState("");
   const history = useHistory();
@@ -19,7 +17,6 @@ const Posts = (props) => {
     const loadUserProfile = () => {
       auth.getProfile((profile, err) => {
         setProfile(auth.userProfile);
-        console.log("Profile: ", auth.userProfile);
         setError(err);
       });
     };
@@ -27,7 +24,6 @@ const Posts = (props) => {
     if (auth.isAuthenticated()) {
       loadUserProfile();
     }
-    console.log("Auth profile from posts: ", profile);
   }, [profile, auth]);
 
   return (
@@ -49,7 +45,6 @@ const Posts = (props) => {
       {!loading ? (
         <ul className="posts-container lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto">
           {posts.map((post) => {
-            console.log("post: ", post);
             return <Post profile={profile} key={post.id} post={post} />;
           })}
         </ul>

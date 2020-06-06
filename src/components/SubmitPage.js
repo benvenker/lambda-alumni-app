@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import PostForm from "./PostForm";
@@ -7,11 +6,8 @@ import PostForm from "./PostForm";
 import "./SubmitPage.css";
 
 const SubmitPage = (props) => {
-  const history = useHistory();
   const { auth } = props;
   const [profile, setProfile] = useState({});
-
-  console.log("auth: ", auth);
 
   useEffect(() => {
     // get the user profile
@@ -19,7 +15,6 @@ const SubmitPage = (props) => {
       auth.getProfile((profile, err) => {
         setProfile(auth.userProfile);
         const body = { username: profile.email };
-        console.log({ body });
 
         const getUserIdFromDb = () => {
           return axios
@@ -44,7 +39,6 @@ const SubmitPage = (props) => {
     };
 
     loadUserProfile();
-    // console.log({ profile });
   }, []);
 
   return <PostForm auth={auth} profile={profile} />;

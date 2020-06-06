@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const ThumbIcon = () => {
   const [clicked, setClicked] = useState(false);
-  const toggleFill = (e) => {};
   return (
     <svg
       width="20"

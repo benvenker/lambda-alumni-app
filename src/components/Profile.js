@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 const Profile = (props) => {
-  console.log(props);
   const { auth } = props;
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState("");
@@ -10,7 +9,6 @@ const Profile = (props) => {
     const loadUserProfile = () => {
       auth.getProfile((profile, err) => {
         setProfile(auth.userProfile);
-        console.log("Profile: ", auth.userProfile);
         setError(err);
       });
     };

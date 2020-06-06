@@ -13,7 +13,7 @@ import Callback from "./Callback";
 
 function App(props) {
   const history = useHistory();
-  const [auth, setAuth] = useState(new Auth(history));
+  const [auth] = useState(new Auth(history));
   const [searchTerms, setSearchterms] = useState("");
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);

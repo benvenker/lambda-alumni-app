@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Logo from "./Logo";
-import axios from "axios";
 import "./SearchBar.css";
 
 const SearchBar = (props) => {

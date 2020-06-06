@@ -26,7 +26,6 @@ export default class Auth {
         this.setSession(authResult);
         this.history.push("/posts");
         this.getProfile(() => {
-          console.log("this.userProfile: ", this.userProfile);
           axios
             .post(`${process.env.REACT_APP_API_URL}/add-user`, {
               username: this.userProfile.email,
@@ -34,7 +33,6 @@ export default class Auth {
             .then((response) => console.log(response))
             .catch((err) => console.log(err));
         });
-        console.log({ authResult });
       } else if (err) {
         this.history.push("/");
         alert(`Error: ${err.error}. Check the console for further details.`);

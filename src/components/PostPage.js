@@ -55,8 +55,6 @@ const PostPage = (props) => {
         auth.getProfile((profile, err) => {
           setProfile(auth.userProfile);
           const body = { username: profile.email };
-          console.log({ body });
-
           const getUserIdFromDb = () => {
             return axios
               .post(
@@ -81,7 +79,6 @@ const PostPage = (props) => {
     };
 
     loadUserProfile();
-    // console.log({ profile });
   }, []);
 
   useEffect(() => {
