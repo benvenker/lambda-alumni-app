@@ -40,11 +40,13 @@ const Posts = (props) => {
       <SearchBar auth={auth} handleSearch={handleSearch} />
       <div className="btn-container lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto h-full">
         {auth.isAuthenticated() ? (
-          <div
-            onClick={() => history.push("/submit")}
-            className="py-1 px-2 bg-blue-400 text-white w-1/4 text-center rounded-md ml-0 my-3 text-xs cursor-pointer"
-          >
-            Submit a New Post
+          <div className="submit-btn-container p-2">
+            <div
+              onClick={() => history.push("/submit")}
+              className="py-1 px-2 bg-blue-400 text-white sm:w-1/2 md:w-1/3 lg:w-1/4 text-center rounded-md ml-0 my-3 text-xs cursor-pointer"
+            >
+              Submit a New Post
+            </div>
           </div>
         ) : (
           // <ButtonGoogle auth={auth} />

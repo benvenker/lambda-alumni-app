@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import Loader from "react-loader-spinner";
 
 const Callback = (props) => {
   const { auth } = props;
@@ -13,7 +14,19 @@ const Callback = (props) => {
     }
   });
 
-  return <h1>Loading...</h1>;
+  return (
+    <div className="loader m-auto flex flex-col">
+      <div className="loader-container m-auto text-center pt-5 border-gray-500">
+        <Loader
+          type="Puff"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          timeout={300000}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Callback;

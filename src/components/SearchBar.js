@@ -19,7 +19,7 @@ const SearchBar = (props) => {
       <span>
         <div className="pt-1">
           <button
-            className="logout-button text-white bg-gray-400 text-xs border-none ml-2 px-3 py-1 rounded-md"
+            className="logout-button text-white bg-gray-400 hover:bg-gray-500 text-xs border-none ml-2 px-3 py-1 rounded-md focus:outline-none"
             onClick={auth.isAuthenticated() ? auth.logout : auth.login}
           >
             {auth.isAuthenticated() ? "Log out" : "Log In"}

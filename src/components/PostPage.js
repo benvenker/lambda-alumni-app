@@ -113,14 +113,17 @@ const PostPage = (props) => {
             editing={editing}
             setEditing={setEditing}
           />
-          <div className="content-container py-0 px-4 w-11/12 my-1 mx-auto">
-            <div className="post-body ml-24">
+          <div className="content-container p-4 sm:w-11/12 md:w-4/5 lg:w-2/4 my-1 mx-auto bg-white rounded-md">
+            <div className="post-body lg:ml-24">
               {post.body && post.body.length > 0 ? (
                 <div className="mt-10 text-gray-700">{post.body}</div>
               ) : null}
             </div>
+            <div className="comment-form-header w-3/4 lg:ml-24 mt-10 text-2xl text-gray-600">
+              Submit a Comment
+            </div>
             <textarea
-              className="rounded-md border border-gray-300 block my-6 ml-24 relative w-2/3 p-1 focus:outline-none text-sm"
+              className="rounded-md border border-gray-300 block sm:my-1 md:my-6 lg:ml-24 relative w-11/12 sm:w-11/12 lg:w-2/3 p-1 focus:outline-none text-sm"
               onChange={handleChange}
               value={request.body}
               name="body"
@@ -130,7 +133,7 @@ const PostPage = (props) => {
               placeholder="Type your comment..."
             />
             <button
-              className="submit-comment-button block ml-24 bg-blue-500 text-white text-xs py-1 px-2 rounded-md "
+              className="submit-comment-button block mt-5 lg:ml-24 bg-blue-500 text-white text-xs py-1 px-2 rounded-md focus:outline-none"
               onClick={submitComment}
             >
               SUBMIT
