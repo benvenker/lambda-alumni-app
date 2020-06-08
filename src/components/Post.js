@@ -75,14 +75,18 @@ const Post = (props) => {
                   {post.title}
                 </a>{" "}
                 <span className="text-sm text-gray-600 underline">
-                  <a href={post.url}>({post.url})</a>
+                  {post.url ? <a href={post.url}>({post.url})</a> : null}
                 </span>
               </div>
             )}
             {/* <div className="post-url text-sm text-gray-300">{post.url.slice(8)}</div> */}
           </div>
           <div className="flex flex-row sm:flex-row text-xs px-3 text-gray-500">
-            by {post.username} | {currPost.votes} votes |{"  "}
+            by {post.username} |{" "}
+            {history.location.pathname === "/posts"
+              ? currPost.votes
+              : post.votes}{" "}
+            votes |{"  "}
             <Link to={`/post/${post.id}`} className="hover:underline ml-1">
               {"  "}
               {post.comments} comments
