@@ -15,14 +15,6 @@ const Posts = (props) => {
 
   // Get the user profile and post new users to the API
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/posts`)
-      .then((res) => setPosts(res.data))
-      .then(setLoading(false))
-      .catch((err) => err);
-  }, [setLoading, setPosts]);
-
-  useEffect(() => {
     const loadUserProfile = () => {
       auth.getProfile((profile, err) => {
         setProfile(auth.userProfile);
@@ -32,8 +24,15 @@ const Posts = (props) => {
 
     if (auth.isAuthenticated()) {
       loadUserProfile();
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/posts`)
+        .then((res) => setPosts(res.data))
+        .then(setLoading(false))
+        .catch((err) => err);
     }
-  }, [profile, auth]);
+  }, [profile, auth, setLoading, setPosts]);
+
+  // useEffect(() => {}, [setLoading, setPosts]);
 
   return (
     <>
@@ -43,7 +42,7 @@ const Posts = (props) => {
           <div className="submit-btn-container p-2">
             <div
               onClick={() => history.push("/submit")}
-              className="py-1 px-2 bg-blue-400 text-white sm:w-1/2 md:w-1/3 lg:w-1/4 text-center rounded-md ml-0 my-3 text-xs cursor-pointer"
+              className="py-1 px-2 bg-blue-400 text-white w-32   lg:w-1/4 text-center rounded-md ml-0 my-3 text-xs cursor-pointer"
             >
               Submit a New Post
             </div>
@@ -55,9 +54,11 @@ const Posts = (props) => {
       </div>
       {!loading ? (
         <ul className="posts-container lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto">
-          {posts.map((post) => {
-            return <Post profile={profile} key={post.id} post={post} />;
-          })}
+          {profile
+            ? posts.map((post) => (
+                <Post profile={profile} key={post.id} post={post} />
+              ))
+            : null}
         </ul>
       ) : (
         <div className="loader m-auto flex flex-col">

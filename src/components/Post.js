@@ -9,6 +9,8 @@ const Post = (props) => {
   const { post, profile, editing, setEditing } = props;
   const [currPost, setCurrPost] = useState(post);
 
+  // console.log(profile.user_id);
+
   const handleVote = (post) => {
     const body = {
       post_id: post.id,
@@ -78,7 +80,7 @@ const Post = (props) => {
             )}
             {/* <div className="post-url text-sm text-gray-300">{post.url.slice(8)}</div> */}
           </div>
-          <div className="flex flex-row text-xs px-3 text-gray-500">
+          <div className="flex flex-row sm:flex-row text-xs px-3 text-gray-500">
             by {post.username} | {post.votes} votes |{"  "}
             <Link to={`/post/${post.id}`} className="hover:underline ml-1">
               {"  "}
