@@ -62,7 +62,7 @@ const Post = (props) => {
           <div className="flex flex-row">
             {history.location.pathname === "/posts" ? (
               <div className="hover:underline text-gray-700 px-3 text-md font-semibold my-0">
-                {post.url.length > 1 ? (
+                {post.url.length > 0 ? (
                   <a href={`${post.url}`}>{post.title}</a>
                 ) : (
                   <Link to={`post/${post.id}`}>{post.title}</Link>
