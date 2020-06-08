@@ -7,9 +7,7 @@ import ThumbIcon from "./ThumbIcon";
 const Post = (props) => {
   const history = useHistory();
   const { post, profile, editing, setEditing } = props;
-  const [currPost, setCurrPost] = useState(post);
-
-  // console.log(profile.user_id);
+  const [currPost, setCurrPost] = useState({ ...post });
 
   const handleVote = (post) => {
     const body = {
@@ -26,7 +24,10 @@ const Post = (props) => {
               .post(`${process.env.REACT_APP_API_URL}/upvote`, body)
               .then((response) =>
                 response.status === 200
-                  ? setCurrPost((post) => post.votes++)
+                  ? setCurrPost({
+                      ...currPost,
+                      votes: Number(currPost.votes + 1),
+                    })
                   : null
               )
       )
@@ -81,7 +82,7 @@ const Post = (props) => {
             {/* <div className="post-url text-sm text-gray-300">{post.url.slice(8)}</div> */}
           </div>
           <div className="flex flex-row sm:flex-row text-xs px-3 text-gray-500">
-            by {post.username} | {post.votes} votes |{"  "}
+            by {post.username} | {currPost.votes} votes |{"  "}
             <Link to={`/post/${post.id}`} className="hover:underline ml-1">
               {"  "}
               {post.comments} comments
