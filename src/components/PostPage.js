@@ -119,9 +119,9 @@ const PostPage = (props) => {
                 <div className="mt-10 text-gray-700">{post.body}</div>
               ) : null}
             </div>
-            <div className="comment-form-header w-3/4 lg:ml-16 mt-10 text-2xl text-gray-600">
+            {/* <div className="comment-form-header w-3/4 lg:ml-16 mt-10 text-2xl text-gray-600">
               Submit a Comment
-            </div>
+            </div> */}
             <textarea
               className="rounded-md border border-gray-300 block w-full sm:my-1 md:my-6 lg:ml-16 relative w-11/12 sm:w-11/12 lg:w-2/3 p-1 focus:outline-none text-sm"
               onChange={handleChange}
@@ -129,7 +129,7 @@ const PostPage = (props) => {
               name="body"
               id="comment-body"
               cols="30"
-              rows="10"
+              rows="5"
               placeholder="Type your comment..."
             />
             <button
