@@ -60,7 +60,7 @@ const PostForm = (props) => {
   return (
     <div className="submit-form-container">
       <form
-        className="bg-white rounded-md border sm:w-11/12 md:w-2/3 lg:w-2/3 mx-auto my-8 p-8"
+        className="bg-gray-100 rounded-md border mx-auto my-8 p-8 sm:w-11/12 md:w-2/3 lg:w-2/3"
         onSubmit={(e) => submitPost(e)}
       >
         {editing ? (

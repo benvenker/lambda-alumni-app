@@ -50,11 +50,11 @@ const PostPage = (props) => {
 
   useEffect(() => {
     // get the user profile
-    const loadUserProfile = () => {
+    const loadUserProfile = async () => {
       if (auth.isAuthenticated())
-        auth.getProfile((profile, err) => {
+        await auth.getProfile((profile, err) => {
           setProfile(auth.userProfile);
-          const body = { username: profile.email };
+          const body = { username: localStorage.getItem("email") };
           const getUserIdFromDb = () => {
             return axios
               .post(
@@ -79,14 +79,15 @@ const PostPage = (props) => {
     };
 
     loadUserProfile();
-  }, []);
 
-  useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/post/${params.id}`)
       .then((res) => setPost(res.data[0]))
       .then((post) => console.log("post: ", post));
-  }, [params.id]);
+  }, [params.id, auth]);
+
+  // useEffect(() => {
+  // }, [params.id]);
 
   useEffect(() => {
     setLoading(true);
@@ -113,37 +114,33 @@ const PostPage = (props) => {
             editing={editing}
             setEditing={setEditing}
           />
-          <div className="content-container p-4 sm:w-11/12 md:w-4/5 lg:w-2/4 my-1 mx-auto bg-white rounded-md">
-            <div className="post-body lg:ml-24">
+          <div className="content-container p-4 sm:w-4/5 sm:m-auto lg:w-2/4 my-1 bg-white rounded-md">
+            <div className="post-body">
               {post.body && post.body.length > 0 ? (
                 <div className="mt-10 text-gray-700">{post.body}</div>
               ) : null}
             </div>
-            <div className="comment-form-header w-3/4 lg:ml-16 mt-10 text-2xl text-gray-600">
+            <div className="comment-form-header w-3/4 mt-10 text-xl text-gray-600">
               Submit a Comment
             </div>
             <textarea
-              className="rounded-md border border-gray-300 block w-full sm:my-1 md:my-6 lg:ml-16 relative w-11/12 sm:w-11/12 lg:w-2/3 p-1 focus:outline-none text-sm"
+              className="rounded-md border border-gray-300 block w-full sm:my-1 md:my-6 relative w-11/12 m:w-2/4 sm:w-11/12 lg:w-2/3 p-1 focus:outline-none text-sm"
               onChange={handleChange}
               value={request.body}
               name="body"
               id="comment-body"
               cols="30"
-              rows="10"
+              rows="5"
               placeholder="Type your comment..."
             />
             <button
-              className="submit-comment-button block mt-5 lg:ml-24 bg-blue-500 text-white text-xs py-1 px-2 rounded-md focus:outline-none"
+              className="submit-comment-button block mt-5 bg-blue-500 text-white text-xs py-1 px-2 rounded-md focus:outline-none"
               onClick={submitComment}
             >
               SUBMIT
             </button>
-            <Comments
-              loading={loading}
-              comments={comments}
-              postId={params.id}
-            />
           </div>
+          <Comments loading={loading} comments={comments} postId={params.id} />
         </div>
       ) : (
         history.push("/")

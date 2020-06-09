@@ -6,7 +6,7 @@ import ThumbIcon from "./ThumbIcon";
 
 const Post = (props) => {
   const history = useHistory();
-  const { post, profile, editing, setEditing } = props;
+  const { auth, post, profile, editing, setEditing } = props;
   const [currPost, setCurrPost] = useState({ ...post });
 
   const handleVote = (post) => {
@@ -49,7 +49,22 @@ const Post = (props) => {
   return (
     <div
       key={post.id}
-      className="post-container py-5 flex justify-between py-4 px-2 h-auto bg-white border-t border-b-0 border-r border-l"
+      className={`
+      ${history.location.pathname.match(/post\//) ? `w-full xl:w-2/4` : null}
+        post-container 
+        py-5 
+        flex 
+        justify-between 
+        py-4 px-2 
+        h-auto
+        bg-white
+        border-t
+        border-b-0
+        border-l
+        border-r
+        sm:w-4/5
+        sm:m-auto
+        xl:w-4/5`}
     >
       <div className="flex flex-row">
         <div className="column">
@@ -81,20 +96,31 @@ const Post = (props) => {
             )}
             {/* <div className="post-url text-sm text-gray-300">{post.url.slice(8)}</div> */}
           </div>
-          <div className="flex flex-row sm:flex-row text-xs px-3 text-gray-500">
-            by {post.username} |{" "}
-            {history.location.pathname === "/posts"
-              ? currPost.votes
-              : post.votes}{" "}
-            votes |{"  "}
-            <Link to={`/post/${post.id}`} className="hover:underline ml-1">
-              {"  "}
-              {post.comments} comments
-            </Link>
+          <div
+            className={`flex ${
+              history.location.pathname === "/posts" ? "flex-row" : "flex-col"
+            } sm:flex-row text-xs px-3 text-gray-500`}
+          >
+            <span>by {post.username} | </span>
+            <span>
+              {history.location.pathname === "/posts"
+                ? currPost.votes
+                : post.votes}{" "}
+              votes |{"  "}
+            </span>
+            <span>
+              <Link to={`/post/${post.id}`} className="hover:underline ml-1">
+                {"  "}
+                {post.comments} comments
+              </Link>
+            </span>
           </div>
         </div>
       </div>
-      {post.user_id && profile.user_id && post.user_id === profile.user_id ? (
+      {post.username &&
+      localStorage.getItem("email") &&
+      post.username === localStorage.getItem("email") &&
+      history.location.pathname.match(/post\//) ? (
         <div className="edit-btns flex flex-row">
           <div className="column">
             <div

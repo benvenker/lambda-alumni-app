@@ -18,6 +18,8 @@ function App(props) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  console.log({ auth });
+
   // Load default list of posts
   useEffect(() => {
     setTimeout(() => {
@@ -45,7 +47,7 @@ function App(props) {
   };
 
   return (
-    <div className="App font-sans bg-gray-100">
+    <div className="App font-sans bg-gray-100 w-full">
       <Route exact path="/">
         <Home auth={auth} />
       </Route>
