@@ -42,7 +42,7 @@ const Posts = (props) => {
           <div className="submit-btn-container p-2">
             <div
               onClick={() => history.push("/submit")}
-              className="py-1 px-2 bg-blue-400 text-white w-32   lg:w-1/4 text-center rounded-md ml-0 my-3 text-xs cursor-pointer"
+              className="py-1 px-2 bg-blue-400 text-white w-32 text-center rounded-md ml-0 my-1 text-xs cursor-pointer"
             >
               Submit a New Post
             </div>

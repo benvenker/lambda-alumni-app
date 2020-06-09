@@ -80,8 +80,30 @@ const Post = (props) => {
               </div>
             )}
             {/* <div className="post-url text-sm text-gray-300">{post.url.slice(8)}</div> */}
+            {post.user_id &&
+            profile.user_id &&
+            post.user_id === profile.user_id ? (
+              <div className="edit-btns flex flex-row">
+                <div className="column">
+                  <div
+                    className="btn-edit bg-white text-gray-600 underline rounded px-2 py-1 text-xs cursor-pointer"
+                    onClick={() => setEditing(true)}
+                  >
+                    Edit
+                  </div>
+                </div>
+                <div className="column">
+                  <div
+                    className="btn-delete bg-red-600 text-white rounded px-2 py-1 box-border text-xs cursor-pointer ml-3"
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </div>
+                </div>
+              </div>
+            ) : null}
           </div>
-          <div className="flex flex-row sm:flex-row text-xs px-3 text-gray-500">
+          <div className="flex flex-row sm:flex-row text-xs text-gray-500">
             by {post.username} |{" "}
             {history.location.pathname === "/posts"
               ? currPost.votes
@@ -94,26 +116,6 @@ const Post = (props) => {
           </div>
         </div>
       </div>
-      {post.user_id && profile.user_id && post.user_id === profile.user_id ? (
-        <div className="edit-btns flex flex-row">
-          <div className="column">
-            <div
-              className="btn-edit bg-white text-gray-600 underline rounded px-2 py-1 text-xs cursor-pointer"
-              onClick={() => setEditing(true)}
-            >
-              Edit
-            </div>
-          </div>
-          <div className="column">
-            <div
-              className="btn-delete bg-red-600 text-white rounded px-2 py-1 box-border text-xs cursor-pointer ml-3"
-              onClick={handleDelete}
-            >
-              Delete
-            </div>
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 };
