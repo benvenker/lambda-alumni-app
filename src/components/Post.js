@@ -26,7 +26,7 @@ const Post = (props) => {
                 response.status === 200
                   ? setCurrPost({
                       ...currPost,
-                      votes: Number(currPost.votes + 1),
+                      votes: Number(currPost.votes) + 1,
                     })
                   : null
               )
