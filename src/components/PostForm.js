@@ -67,15 +67,15 @@ const PostForm = (props) => {
         onSubmit={(e) => submitPost(e)}
       >
         {editing ? (
-          <h1 className="text-2xl ml-5 text-bold text-gray-700">Edit Post</h1>
+          <h1 className="text-xl ml-5 text-bold text-gray-700">Edit Post</h1>
         ) : (
-          <h1 className="text-2xl ml-5 text-bold text-gray-700">
+          <h1 className="text-xl ml-5 text-bold text-gray-700">
             Submit New Post
           </h1>
         )}
         <label htmlFor="title" id="title" name="title">
           <input
-            className="form-input py-4 px-3 focus:outline-none w-11/12"
+            className="form-input py-4 px-3 focus:outline-none w-11/12 text-gray-700"
             onChange={editing ? handlePostUpdate : handleChange}
             type="text"
             id="title"
@@ -86,7 +86,7 @@ const PostForm = (props) => {
         </label>
         <label htmlFor="url" id="url" name="url">
           <input
-            className="form-input py-4 px-3 focus:outline-none w-11/12"
+            className="form-input py-4 px-3 focus:outline-none w-11/12 text-gray-700"
             onChange={editing ? handlePostUpdate : handleChange}
             type="text"
             id="url"
@@ -103,17 +103,23 @@ const PostForm = (props) => {
             value={editing ? post.body : formState.body}
             id="body"
             cols="30"
-            rows="10"
+            rows="5"
             className="resize-none focus:outline-none py-4 px-3 bg border text-gray-700 m-5 rounded-md w-11/12"
           ></textarea>
         </label>
         <button
-          className="ml-5 bg-blue-500 text-white rounded-md py-1 px-3 text-sm"
+          className="inline-block ml-5 bg-blue-500 text-white rounded-md py-1 px-3 text-sm"
           type="submit"
           onClick={editing ? updatePost : submitPost}
         >
           Submit
         </button>
+        <div
+          onClick={() => history.push("/posts")}
+          className="cancel-btn inline-block ml-5 bg-red-500 text-white text-sm py-1 px-3 rounded-md"
+        >
+          Cancel
+        </div>
       </form>
     </div>
   );
