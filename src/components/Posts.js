@@ -10,7 +10,6 @@ import axios from "axios";
 const Posts = (props) => {
   const { auth, handleSearch, posts, setPosts, loading, setLoading } = props;
   const [profile, setProfile] = useState({ email: "" });
-  const [sort, setSort] = useState("");
   const [error, setError] = useState("");
   const history = useHistory();
 
@@ -46,7 +45,6 @@ const Posts = (props) => {
       .get(`${process.env.REACT_APP_API_URL}/posts`)
       .then((response) => setPosts(response.data));
   };
-  // useEffect(() => {}, [setLoading, setPosts]);
 
   return (
     <>
