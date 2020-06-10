@@ -10,6 +10,7 @@ import axios from "axios";
 const Posts = (props) => {
   const { auth, handleSearch, posts, setPosts, loading, setLoading } = props;
   const [profile, setProfile] = useState({ email: "" });
+  const [sort, setSort] = useState("");
   const [error, setError] = useState("");
   const history = useHistory();
 
@@ -32,21 +33,52 @@ const Posts = (props) => {
     }
   }, [profile, auth, setLoading, setPosts]);
 
+  // Get the with the most votes first
+  const sortByMostVotes = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/popular`)
+      .then((response) => setPosts(response.data));
+  };
+
+  // Get the most recent posts
+  const sortByMostRecent = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/posts`)
+      .then((response) => setPosts(response.data));
+  };
   // useEffect(() => {}, [setLoading, setPosts]);
 
   return (
     <>
       <SearchBar auth={auth} handleSearch={handleSearch} />
-      <div className="btn-container lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto h-full">
+      <div className="btn-container flex lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto h-full">
         {auth.isAuthenticated() ? (
-          <div className="submit-btn-container p-2">
-            <div
-              onClick={() => history.push("/submit")}
-              className="py-1 px-2 bg-blue-400 text-white w-32 text-center rounded-md ml-0 my-1 text-xs cursor-pointer"
-            >
-              Submit a New Post
+          <>
+            <div className="submit-btn-container p-2">
+              <div
+                onClick={() => history.push("/submit")}
+                className="py-1 px-2 bg-blue-400 text-white w-32 text-center rounded-md ml-0 my-1 text-xs cursor-pointer"
+              >
+                Submit a New Post
+              </div>
             </div>
-          </div>
+            <div className="popular-btn p-2">
+              <div
+                onClick={sortByMostVotes}
+                className="py-1 px-2 bg-gray-400 text-white w-30 text-center rounded-md mx-0 my-1 text-xs cursor-pointer"
+              >
+                Popular
+              </div>
+            </div>
+            <div className="recent-btn p-2">
+              <div
+                onClick={sortByMostRecent}
+                className="py-1 px-2 bg-gray-400 text-white w-30 text-center rounded-md mx-0 my-1 text-xs cursor-pointer"
+              >
+                Recent
+              </div>
+            </div>
+          </>
         ) : (
           // <ButtonGoogle auth={auth} />
           history.push("/")
