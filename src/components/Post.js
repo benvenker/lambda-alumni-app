@@ -75,18 +75,45 @@ const Post = (props) => {
             {history.location.pathname === "/posts" ? (
               <div className="hover:underline text-gray-700 px-3 text-md font-semibold my-0">
                 {post.url.length > 0 ? (
-                  <a href={`${post.url}`}>{post.title}</a>
+                  <a
+                    href={
+                      /http:\/\/|https:\/\//.test(post.url)
+                        ? post.url
+                        : `https://${post.url}`
+                    }
+                  >
+                    {post.title}
+                  </a>
                 ) : (
                   <Link to={`post/${post.id}`}>{post.title}</Link>
                 )}
               </div>
             ) : (
               <div>
-                <a className="text-gray-700 font-semibold" href={post.url}>
+                <a
+                  className="text-gray-700 font-semibold"
+                  href={
+                    /http:\/\/|https:\/\//.test(post.url)
+                      ? post.url
+                      : `https://${post.url}`
+                  }
+                >
                   {post.title}
                 </a>{" "}
                 <span className="text-sm text-gray-600 underline">
-                  {post.url ? <a href={post.url}>({post.url})</a> : null}
+                  {post.url ? (
+                    <a
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      href={
+                        /http:\/\/|https:\/\//.test(post.url)
+                          ? post.url
+                          : `https://${post.url}`
+                      }
+                    >
+                      ({post.url})
+                    </a>
+                  ) : null}
                 </span>
               </div>
             )}
