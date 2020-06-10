@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Post from "./Post";
 import "./Posts.css";
 import SearchBar from "./SearchBar";
+import AddButton from "./AddButton";
 import Loader from "react-loader-spinner";
 import axios from "axios";
 // import posts from "../data";
@@ -61,6 +62,7 @@ const Posts = (props) => {
 
   return (
     <>
+      <AddButton />
       <SearchBar auth={auth} handleSearch={handleSearch} />
       <div className="btn-container flex lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto h-full">
         {auth.isAuthenticated() ? (
