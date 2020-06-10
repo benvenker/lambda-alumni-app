@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import swal from "@sweetalert/with-react";
 import axios from "axios";
 import "./Post.css";
 import ThumbIcon from "./ThumbIcon";
@@ -37,13 +38,23 @@ const Post = (props) => {
 
   const handleDelete = () => {
     const body = { id: post.id };
-    axios
-      .delete(`${process.env.REACT_APP_API_URL}/post/${post.id}`, body)
-      .then((response) => {
-        console.log(response);
-      })
-      .then(history.push("/"))
-      .catch((err) => console.log(err));
+    swal({
+      title: "Are you sure?",
+      text: "You're about to delete a post. You can't undo this action.",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios
+          .delete(`${process.env.REACT_APP_API_URL}/post/${post.id}`, body)
+          .then((response) => {
+            console.log(response);
+          })
+          .then(history.push("/"))
+          .catch((err) => console.log(err));
+      }
+    });
   };
 
   return (

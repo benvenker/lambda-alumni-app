@@ -10,7 +10,6 @@ import axios from "axios";
 const Posts = (props) => {
   const { auth, handleSearch, posts, setPosts, loading, setLoading } = props;
   const [profile, setProfile] = useState({ email: "" });
-  const [sort, setSort] = useState("");
   const [error, setError] = useState("");
   const history = useHistory();
 
@@ -46,7 +45,6 @@ const Posts = (props) => {
       .get(`${process.env.REACT_APP_API_URL}/posts`)
       .then((response) => setPosts(response.data));
   };
-  // useEffect(() => {}, [setLoading, setPosts]);
 
   return (
     <>
@@ -65,7 +63,7 @@ const Posts = (props) => {
             <div className="popular-btn p-2">
               <div
                 onClick={sortByMostVotes}
-                className="py-1 px-2 bg-gray-400 text-white w-30 text-center rounded-md mx-0 my-1 text-xs cursor-pointer"
+                className="py-1 px-2 bg-orange-400 text-white w-30 text-center rounded-md mx-0 my-1 text-xs cursor-pointer"
               >
                 Popular
               </div>
@@ -73,7 +71,7 @@ const Posts = (props) => {
             <div className="recent-btn p-2">
               <div
                 onClick={sortByMostRecent}
-                className="py-1 px-2 bg-gray-400 text-white w-30 text-center rounded-md mx-0 my-1 text-xs cursor-pointer"
+                className="py-1 px-2 bg-green-500 text-white w-30 text-center rounded-md mx-0 my-1 text-xs cursor-pointer"
               >
                 Recent
               </div>
