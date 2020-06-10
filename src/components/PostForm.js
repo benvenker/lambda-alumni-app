@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const PostForm = (props) => {
   const { auth, profile, editing, setEditing, post, setPost } = props;
+  const history = useHistory();
   const [formState, setFormState] = useState({
     title: "",
     url: "",
@@ -36,7 +38,8 @@ const PostForm = (props) => {
           Authorization: `Bearer ${auth.getAccessToken()}`,
         },
       })
-      .then((response) => console.log(response));
+      .then((response) => console.log(response))
+      .then(history.push("/posts"));
   };
 
   const updatePost = (e) => {

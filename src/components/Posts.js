@@ -32,6 +32,19 @@ const Posts = (props) => {
     }
   }, [profile, auth, setLoading, setPosts]);
 
+  // Refresh the page when the route loads to load new data...
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/posts`)
+        .then((res) => setPosts(res.data))
+        .then(setLoading(false))
+        .then(setLoading(false))
+        .catch((err) => err);
+    }, 800);
+  }, []);
+
   // Get the with the most votes first
   const sortByMostVotes = () => {
     axios
