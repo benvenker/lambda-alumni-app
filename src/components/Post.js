@@ -60,18 +60,18 @@ const Post = (props) => {
   return (
     <div
       key={post.id}
-      className="post-container py-5 flex justify-between py-4 px-2 h-auto bg-white border-t border-b-0 border-r border-l"
+      className="post-container py-5 flex py-4 px-2 h-auto bg-white border-t border-b-0 border-r border-l"
     >
-      <div className="flex flex-row">
+      <div className="flex flex-row w-full">
         <div className="column">
           {" "}
           <div className="mx-1 my-0 py-1 px-0" onClick={() => handleVote(post)}>
             <ThumbIcon />
           </div>
         </div>
-        <div className="column">
+        <div className="column w-full">
           {" "}
-          <div className="flex flex-row">
+          <div className="flex flex-row justify-between">
             {history.location.pathname === "/posts" ? (
               <div className="hover:underline text-gray-700 px-3 text-md font-semibold my-0">
                 {post.url.length > 0 ? (
@@ -91,7 +91,7 @@ const Post = (props) => {
             ) : (
               <div>
                 <a
-                  className="text-gray-700 font-semibold"
+                  className="text-gray-700 px-3 text-md font-semibold my-0"
                   href={
                     /http:\/\/|https:\/\//.test(post.url)
                       ? post.url
@@ -100,7 +100,7 @@ const Post = (props) => {
                 >
                   {post.title}
                 </a>{" "}
-                <span className="text-sm text-gray-600 underline">
+                <span className="text-sm text-gray-600 px-3 underline">
                   {post.url ? (
                     <a
                       rel="noopener noreferrer"
@@ -141,7 +141,7 @@ const Post = (props) => {
               </div>
             ) : null}
           </div>
-          <div className="flex flex-row sm:flex-row text-xs text-gray-500">
+          <div className="flex flex-row px-3 sm:flex-row text-xs text-gray-500">
             by {post.username} |{" "}
             {history.location.pathname === "/posts"
               ? currPost.votes
