@@ -41,7 +41,6 @@ const Posts = (props) => {
         .get(`${process.env.REACT_APP_API_URL}/posts`)
         .then((res) => setPosts(res.data))
         .then(setLoading(false))
-        .then(setLoading(false))
         .catch((err) => err);
     }, 800);
   }, []);
