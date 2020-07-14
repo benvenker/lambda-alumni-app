@@ -48,14 +48,14 @@ const Posts = props => {
   // Get the with the most votes first
   const sortByMostVotes = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/popular`)
+      .get(`${process.env.REACT_APP_API_URL}/popular/?items=10&page=0`)
       .then(response => setPosts(response.data));
   };
 
   // Get the most recent posts
   const sortByMostRecent = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/posts`)
+      .get(`${process.env.REACT_APP_API_URL}/posts/?items=10&page=1`)
       .then(response => setPosts(response.data));
   };
 
