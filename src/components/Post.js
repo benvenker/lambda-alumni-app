@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import swal from "@sweetalert/with-react";
-import axios from "axios";
-import "./Post.css";
-import ThumbIcon from "./ThumbIcon";
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import swal from '@sweetalert/with-react';
+import axios from 'axios';
+import './Post.css';
+import ThumbIcon from './ThumbIcon';
 
-const Post = (props) => {
+const Post = props => {
   const history = useHistory();
   const { post, profile, editing, setEditing } = props;
   const [currPost, setCurrPost] = useState({ ...post });
 
-  const handleVote = (post) => {
+  const handleVote = post => {
     const body = {
       post_id: post.id,
       username: profile.email,
@@ -18,12 +18,12 @@ const Post = (props) => {
 
     axios
       .post(`${process.env.REACT_APP_API_URL}/check-vote`, body)
-      .then((response) =>
+      .then(response =>
         response.data.length > 0
           ? null // If the vote exists, we don't want to do anything
           : axios
               .post(`${process.env.REACT_APP_API_URL}/upvote`, body)
-              .then((response) =>
+              .then(response =>
                 response.status === 200
                   ? setCurrPost({
                       ...currPost,
@@ -33,26 +33,26 @@ const Post = (props) => {
               )
       )
 
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   };
 
   const handleDelete = () => {
     const body = { id: post.id };
     swal({
-      title: "Are you sure?",
+      title: 'Are you sure?',
       text: "You're about to delete a post. You can't undo this action.",
-      icon: "warning",
+      icon: 'warning',
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
+    }).then(willDelete => {
       if (willDelete) {
         axios
           .delete(`${process.env.REACT_APP_API_URL}/post/${post.id}`, body)
-          .then((response) => {
+          .then(response => {
             console.log(response);
           })
-          .then(history.push("/"))
-          .catch((err) => console.log(err));
+          .then(history.push('/'))
+          .catch(err => console.log(err));
       }
     });
   };
@@ -64,15 +64,15 @@ const Post = (props) => {
     >
       <div className="flex flex-row w-full">
         <div className="column">
-          {" "}
+          {' '}
           <div className="mx-1 my-0 py-1 px-0" onClick={() => handleVote(post)}>
             <ThumbIcon />
           </div>
         </div>
         <div className="column w-full">
-          {" "}
+          {' '}
           <div className="flex flex-row justify-between">
-            {history.location.pathname === "/posts" ? (
+            {history.location.pathname === '/posts' ? (
               <div className="hover:underline text-gray-700 px-3 text-md font-semibold my-0">
                 {post.url.length > 0 ? (
                   <a
@@ -99,7 +99,7 @@ const Post = (props) => {
                   }
                 >
                   {post.title}
-                </a>{" "}
+                </a>{' '}
                 <span className="text-sm text-gray-600 px-3 underline">
                   {post.url ? (
                     <a
@@ -142,13 +142,13 @@ const Post = (props) => {
             ) : null}
           </div>
           <div className="flex flex-row px-3 sm:flex-row text-xs text-gray-500">
-            by {post.username} |{" "}
-            {history.location.pathname === "/posts"
+            by {post.username} |{' '}
+            {history.location.pathname === '/posts'
               ? currPost.votes
-              : post.votes}{" "}
-            votes |{"  "}
-            <Link to={`/post/${post.id}`} className="hover:underline ml-1">
-              {"  "}
+              : post.votes}{' '}
+            votes |{'  '}
+            <Link to={`/post/${post.id}`} className="underline ml-1">
+              {'  '}
               {post.comments} comments
             </Link>
           </div>
