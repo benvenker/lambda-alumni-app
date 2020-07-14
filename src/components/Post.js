@@ -59,7 +59,7 @@ const Post = (props) => {
 
   return (
     <div
-      key={post.id}
+      // key={post.id}
       className="post-container py-5 flex py-4 px-2 h-auto bg-white border-t border-b-0 border-r border-l"
     >
       <div className="flex flex-row w-full">
