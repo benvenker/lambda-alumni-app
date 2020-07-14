@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import Post from "./Post";
-import "./Posts.css";
-import SearchBar from "./SearchBar";
-import AddButton from "./AddButton";
-import Loader from "react-loader-spinner";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import Post from './Post';
+import './Posts.css';
+import SearchBar from './SearchBar';
+import AddButton from './AddButton';
+import Loader from 'react-loader-spinner';
+import axios from 'axios';
 // import posts from "../data";
 
-const Posts = (props) => {
+const Posts = props => {
   const { auth, handleSearch, posts, setPosts, loading, setLoading } = props;
-  const [profile, setProfile] = useState({ email: "" });
-  const [error, setError] = useState("");
+  const [profile, setProfile] = useState({ email: '' });
+  const [error, setError] = useState('');
   const history = useHistory();
 
   // Get the user profile and post new users to the API
@@ -26,10 +26,10 @@ const Posts = (props) => {
     if (auth.isAuthenticated()) {
       loadUserProfile();
       axios
-        .get(`${process.env.REACT_APP_API_URL}/posts`)
-        .then((res) => setPosts(res.data))
+        .get(`${process.env.REACT_APP_API_URL}/posts/?items=10&page=1`)
+        .then(res => console.log(res.data))
         .then(setLoading(false))
-        .catch((err) => err);
+        .catch(err => err);
     }
   }, [profile, auth, setLoading, setPosts]);
 
@@ -38,10 +38,10 @@ const Posts = (props) => {
     setLoading(true);
     setTimeout(() => {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/posts`)
-        .then((res) => setPosts(res.data))
+        .get(`${process.env.REACT_APP_API_URL}/posts/?items=10&page=1`)
+        .then(res => setPosts(res.data))
         .then(setLoading(false))
-        .catch((err) => err);
+        .catch(err => err);
     }, 800);
   }, []);
 
@@ -49,14 +49,14 @@ const Posts = (props) => {
   const sortByMostVotes = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/popular`)
-      .then((response) => setPosts(response.data));
+      .then(response => setPosts(response.data));
   };
 
   // Get the most recent posts
   const sortByMostRecent = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/posts`)
-      .then((response) => setPosts(response.data));
+      .then(response => setPosts(response.data));
   };
 
   return (
@@ -68,7 +68,7 @@ const Posts = (props) => {
           <>
             <div className="submit-btn-container p-2">
               <div
-                onClick={() => history.push("/submit")}
+                onClick={() => history.push('/submit')}
                 className="py-1 px-2 bg-blue-400 text-white w-32 text-center rounded-md ml-0 my-1 text-xs cursor-pointer"
               >
                 Submit a New Post
@@ -93,13 +93,13 @@ const Posts = (props) => {
           </>
         ) : (
           // <ButtonGoogle auth={auth} />
-          history.push("/")
+          history.push('/')
         )}
       </div>
       {!loading ? (
         <ul className="posts-container lg:w-1/2 md:w-2/3 sm:w-11/12 my-2 mx-auto">
           {profile
-            ? posts.map((post) => (
+            ? posts.map(post => (
                 <Post profile={profile} key={post.id} post={post} />
               ))
             : null}

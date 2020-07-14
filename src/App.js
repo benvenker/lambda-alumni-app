@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Route, useHistory, Redirect } from "react-router-dom";
-import axios from "axios";
-import Auth from "./auth/Auth";
+import React, { useState, useEffect } from 'react';
+import { Route, useHistory, Redirect } from 'react-router-dom';
+import axios from 'axios';
+import Auth from './auth/Auth';
 
-import Home from "./components/Home";
-import SearchBar from "./components/SearchBar";
-import Posts from "./components/Posts";
-import PostPage from "./components/PostPage";
-import SubmitPage from "./components/SubmitPage";
-import Profile from "./components/Profile";
-import Callback from "./Callback";
+import Home from './components/Home';
+import SearchBar from './components/SearchBar';
+import Posts from './components/Posts';
+import PostPage from './components/PostPage';
+import SubmitPage from './components/SubmitPage';
+import Profile from './components/Profile';
+import Callback from './Callback';
 
 function App(props) {
   const history = useHistory();
   const [auth] = useState(new Auth(history));
-  const [searchTerms, setSearchterms] = useState("");
+  const [searchTerms, setSearchterms] = useState('');
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,23 +23,23 @@ function App(props) {
     setTimeout(() => {
       if (auth.isAuthenticated()) {
         const body = { terms: searchTerms };
-        searchTerms === ""
+        searchTerms === ''
           ? axios
-              .get(`${process.env.REACT_APP_API_URL}/posts`)
-              .then((res) => setPosts(res.data))
+              .get(`${process.env.REACT_APP_API_URL}/posts/?items=10&page=1`)
+              .then(res => setPosts(res.data))
               .then(setLoading(false))
-              .catch((err) => err)
+              .catch(err => err)
           : axios
               .post(`${process.env.REACT_APP_API_URL}/search`, body)
-              .then((res) => setPosts(res.data))
+              .then(res => setPosts(res.data))
               .then(setLoading(false))
-              .catch((err) => console.log(err));
+              .catch(err => console.log(err));
       }
     }, 1000);
   }, [searchTerms]);
 
   // Handle searching
-  const handleSearch = (e) => {
+  const handleSearch = e => {
     e.preventDefault();
     setSearchterms(e.target.value);
   };
