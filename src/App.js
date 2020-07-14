@@ -10,6 +10,7 @@ import PostPage from './components/PostPage';
 import SubmitPage from './components/SubmitPage';
 import Profile from './components/Profile';
 import Callback from './Callback';
+import Pagination from './components/Pagination';
 
 function App(props) {
   const history = useHistory();
@@ -17,6 +18,7 @@ function App(props) {
   const [searchTerms, setSearchterms] = useState('');
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
   // Load default list of posts
   useEffect(() => {
@@ -64,6 +66,12 @@ function App(props) {
           posts={posts}
           setPosts={setPosts}
           searchTerms={searchTerms}
+        />
+        <Pagination
+          page={page}
+          setPage={setPage}
+          posts={posts}
+          setPosts={setPosts}
         />
       </Route>
       <Route path="/submit">
