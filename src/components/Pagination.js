@@ -22,10 +22,10 @@ const Pagination = props => {
       .catch(err => console.log(err));
   };
   return (
-    <div className="pagination mx-auto flex items-center">
+    <div className="pagination mx-auto flex items-center justify-center">
       {page > 1 ? (
         <button
-          className="bg-white rounded p-2 border m-auto"
+          className="bg-white rounded p-2 border m-auto w-32 focus:outline-none"
           onClick={() => {
             setPage(page - 1);
             previousPage(page);
@@ -36,7 +36,7 @@ const Pagination = props => {
       ) : null}
       {!posts.length < 10 ? (
         <button
-          className="bg-white rounded p-2 border m-auto"
+          className="bg-white rounded p-2 border m-auto w-32 focus:outline-none"
           onClick={() => {
             setPage(page + 1);
             nextPage(page);
