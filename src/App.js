@@ -54,10 +54,10 @@ function App(props) {
       <Route path="/callback">
         <Callback auth={auth} />
       </Route>
-      <Route path="/post/:id">
+      <Route path="/posts/:id">
         <PostPage auth={auth} />
       </Route>
-      <Route path="/posts">
+      <Route exact path="/posts">
         <Posts
           auth={auth}
           loading={loading}

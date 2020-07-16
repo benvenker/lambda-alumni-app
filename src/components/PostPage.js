@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import axios from "axios";
-import SearchBar from "./SearchBar";
-import "./PostPage.css";
-import Post from "./Post";
-import Comments from "./Comments";
-import PostForm from "./PostForm";
+import React, { useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import SearchBar from './SearchBar';
+import './PostPage.css';
+import Post from './Post';
+import Comments from './Comments';
+import PostForm from './PostForm';
 
-const PostPage = (props) => {
+const PostPage = props => {
   const history = useHistory();
   const { auth } = props;
   const params = useParams();
@@ -19,33 +19,36 @@ const PostPage = (props) => {
 
   const [request, setRequest] = useState({
     post_id: params.id,
-    body: "",
+    body: '',
     user_id: 0,
     // created_date: new Date(),
   });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     e.preventDefault();
     setRequest({ ...request, [e.target.name]: e.target.value });
   };
 
-  const submitComment = (e) => {
+  const submitComment = e => {
     e.preventDefault();
 
     setLoading(true);
-    axios.post(`${process.env.REACT_APP_API_URL}/post`, request).then((res) => {
-      axios
-        .get(`${process.env.REACT_APP_API_URL}/comments/${params.id}`, {
-          headers: {
-            Authorization: `Bearer ${props.auth.getAccessToken()}`,
-          },
-        })
-        .then((res) => {
-          setComments(res.data);
-          setLoading(false);
-          setRequest({ ...request, body: "" });
-        });
-    });
+    // TODO: figure out what do with this: the below API call calls a POST to /posts but is inserting a comment
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/comments`, request)
+      .then(res => {
+        axios
+          .get(`${process.env.REACT_APP_API_URL}/comments/${params.id}`, {
+            headers: {
+              Authorization: `Bearer ${props.auth.getAccessToken()}`,
+            },
+          })
+          .then(res => {
+            setComments(res.data);
+            setLoading(false);
+            setRequest({ ...request, body: '' });
+          });
+      });
   };
 
   useEffect(() => {
@@ -57,9 +60,8 @@ const PostPage = (props) => {
           const body = { username: profile.email };
           const getUserIdFromDb = () => {
             return axios
-              .post(
-                `${process.env.REACT_APP_API_URL}/users`,
-                body
+              .get(
+                `${process.env.REACT_APP_API_URL}/users/username?username=${profile.email}`
                 // {
                 //   headers: {
                 //     "Content-Type": "application/json",
@@ -67,7 +69,7 @@ const PostPage = (props) => {
                 //   },
                 // }
               )
-              .then((response) => {
+              .then(response => {
                 console.log(response);
                 setProfile({ ...profile, user_id: response.data.id });
                 setRequest({ ...request, user_id: response.data.id });
@@ -83,9 +85,9 @@ const PostPage = (props) => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/post/${params.id}`)
-      .then((res) => setPost(res.data[0]))
-      .then((post) => console.log("post: ", post));
+      .get(`${process.env.REACT_APP_API_URL}/posts/${params.id}`)
+      .then(res => setPost(res.data[0]))
+      .then(post => console.log('post: ', post));
   }, [params.id]);
 
   useEffect(() => {
@@ -96,7 +98,7 @@ const PostPage = (props) => {
           Authorization: `Bearer ${props.auth.getAccessToken()}`,
         },
       })
-      .then((response) => {
+      .then(response => {
         setComments(response.data);
         setLoading(false);
       });
@@ -146,7 +148,7 @@ const PostPage = (props) => {
           </div>
         </div>
       ) : (
-        history.push("/")
+        history.push('/')
       )}
     </div>
   ) : (

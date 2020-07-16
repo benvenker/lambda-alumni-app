@@ -17,12 +17,15 @@ const Post = props => {
     };
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/check-vote`, body)
+      .get(
+        `${process.env.REACT_APP_API_URL}/votes/check-vote?post_id=${post.id}&username=${profile.email}`,
+        body
+      )
       .then(response =>
         response.data.length > 0
           ? null // If the vote exists, we don't want to do anything
           : axios
-              .post(`${process.env.REACT_APP_API_URL}/upvote`, body)
+              .post(`${process.env.REACT_APP_API_URL}/votes/upvote`, body)
               .then(response =>
                 response.status === 200
                   ? setCurrPost({
@@ -47,7 +50,7 @@ const Post = props => {
     }).then(willDelete => {
       if (willDelete) {
         axios
-          .delete(`${process.env.REACT_APP_API_URL}/post/${post.id}`, body)
+          .delete(`${process.env.REACT_APP_API_URL}/posts/${post.id}`, body)
           .then(response => {
             console.log(response);
           })
@@ -85,7 +88,7 @@ const Post = props => {
                     {post.title}
                   </a>
                 ) : (
-                  <Link to={`post/${post.id}`}>{post.title}</Link>
+                  <Link to={`posts/${post.id}`}>{post.title}</Link>
                 )}
               </div>
             ) : (
@@ -147,7 +150,7 @@ const Post = props => {
               ? currPost.votes
               : post.votes}{' '}
             votes |{'  '}
-            <Link to={`/post/${post.id}`} className="underline ml-1">
+            <Link to={`/posts/${post.id}`} className="underline ml-1">
               {'  '}
               {post.comments} comments
             </Link>

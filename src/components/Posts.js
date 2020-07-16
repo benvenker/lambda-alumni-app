@@ -48,7 +48,7 @@ const Posts = props => {
   // Get the with the most votes first
   const sortByMostVotes = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/popular/?items=10&page=0`)
+      .get(`${process.env.REACT_APP_API_URL}/posts/popular/?items=10&page=0`)
       .then(response => setPosts(response.data));
   };
 

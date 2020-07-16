@@ -1,30 +1,30 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
-const PostForm = (props) => {
+const PostForm = props => {
   const { auth, profile, editing, setEditing, post, setPost } = props;
   const history = useHistory();
   const [formState, setFormState] = useState({
-    title: "",
-    url: "",
-    body: "",
+    title: '',
+    url: '',
+    body: '',
     created_date: new Date(),
-    username: "",
+    username: '',
     user_id: profile.user_id,
   });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     e.preventDefault();
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  const handlePostUpdate = (e) => {
+  const handlePostUpdate = e => {
     e.preventDefault();
     setPost({ ...post, [e.target.name]: e.target.value });
   };
 
-  const submitPost = (e) => {
+  const submitPost = e => {
     e.preventDefault();
     const body = {
       ...formState,
@@ -32,17 +32,17 @@ const PostForm = (props) => {
       username: profile.email,
     };
     axios
-      .post(`${process.env.REACT_APP_API_URL}/submit`, body, {
+      .post(`${process.env.REACT_APP_API_URL}/posts`, body, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${auth.getAccessToken()}`,
         },
       })
-      .then((response) => console.log(response))
-      .then(history.push("/posts"));
+      .then(response => console.log(response))
+      .then(history.push('/posts'));
   };
 
-  const updatePost = (e) => {
+  const updatePost = e => {
     e.preventDefault();
     const body = {
       ...post,
@@ -50,21 +50,21 @@ const PostForm = (props) => {
       username: profile.email,
     };
     axios
-      .put(`${process.env.REACT_APP_API_URL}/post/${post.id}`, body, {
+      .put(`${process.env.REACT_APP_API_URL}/posts/${post.id}`, body, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${auth.getAccessToken()}`,
         },
       })
       .then(setEditing(false))
-      .then((response) => console.log(response));
+      .then(response => console.log(response));
   };
 
   return (
     <div className="submit-form-container">
       <form
         className="bg-white rounded-md border sm:w-11/12 md:w-2/3 lg:w-2/3 mx-auto my-8 p-8"
-        onSubmit={(e) => submitPost(e)}
+        onSubmit={e => submitPost(e)}
       >
         {editing ? (
           <h1 className="text-xl ml-5 text-bold text-gray-700">Edit Post</h1>
@@ -115,7 +115,7 @@ const PostForm = (props) => {
           Submit
         </button>
         <div
-          onClick={() => history.push("/posts")}
+          onClick={() => history.push('/posts')}
           className="cancel-btn inline-block ml-5 bg-red-500 text-white text-sm py-1 px-3 rounded-md"
         >
           Cancel
